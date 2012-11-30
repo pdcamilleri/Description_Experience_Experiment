@@ -40,7 +40,7 @@ $_SESSION['homepage_visit'] = true;
        At the end of the task you will receive a code that should be copied back into the Mechanical Turk HIT that will trigger payment. 
        If you are happy to proceed and are 18 years or older, then click on the 'Play' button below.
     </p>
-    <form action="Demographics.php" method="get">
+    <form action="demographics.php" method="get">
         <div >
             <button class="myButton" type="submit">Play</button>
         </div>
