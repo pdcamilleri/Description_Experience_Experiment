@@ -9,7 +9,7 @@ $_SESSION['homepage_visit'] = true;
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <title>Decision-making Game</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
     <!-- script to ensure javascript is enabled -->
     <script type="text/javascript" src="js/check_js_enabled.js"></script>
 </head>

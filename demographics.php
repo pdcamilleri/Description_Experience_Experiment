@@ -18,7 +18,7 @@ function seenHomepage() {
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
     <title>Decision-making Game</title>
-    <link rel="stylesheet" type="text/css" href="css/demographics.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <!-- javascript to check that all information is given on the demographics page -->
     <script type="text/javascript" src="js/demographics.js"></script>

@@ -1,3 +1,5 @@
+//TODO need to retain these demographics. stick it in the php session for current user, extract at the end when writing to a file
+// http://mrarrowhead.com/index.php?page=php_passing_variables.php
     //Ensure that every question is answered, otherwise alert an error
     function checkAnswers() {
         var DemographicsForm = document.getElementById("DemographicsForm");
