@@ -12,6 +12,18 @@ $_SESSION['homepage_visit'] = true;
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <!-- script to ensure javascript is enabled -->
     <script type="text/javascript" src="js/check_js_enabled.js"></script>
+    <script src="jquery/jquery.js"></script>
+    <script type="text/javascript">
+    function getnextvalue() {
+       $.get("http://localhost/~pdc/Exp11g/problem01.txt", function(data, status) {
+             alert(data);
+          } 
+             
+       );
+
+       return false;
+    }
+    </script>
 </head>
 <body>
 <div id="container">
@@ -25,7 +37,7 @@ $_SESSION['homepage_visit'] = true;
        Other options are probabilistic and will pay out or take away a <i>different</i> number of points on each play.
     </p>
     <p>
-       Your job is to earn the most amount of points by choosing between the options presented in each choice problem. 
+       job is to earn the most amount of points by choosing between the options presented in each choice problem. 
        <b>
           In some problems you will always lose, so try to lose the least, and in other problems you will always win, so try to win the most
        </b>. 
@@ -40,15 +52,25 @@ $_SESSION['homepage_visit'] = true;
        At the end of the task you will receive a code that should be copied back into the Mechanical Turk HIT that will trigger payment. 
        If you are happy to proceed and are 18 years or older, then click on the 'Play' button below.
     </p>
+    <button class="myButton" id="myzButton" onclick="getnextvalue();" > CLICK </button>
     <form action="demographics.php" method="get">
         <div >
-            <button class="myButton" type="submit">Play</button>
+            <button class="myButton" id="myButton" type="submit" onsubmit="return getnextvalue()">Play</button>
         </div>
     </form>
-    <!-- Will only appear if javascript id disabled -->
+    <!-- Will only appear if javascript is disabled -->
     <p id="enabled">
        NOTE: We have checked your browser and found that javascript is not enabled. 
        You will not be able to complete this task unless you enable javascript from your internet browser options screen.
+    </p>
+    <p>
+    <?php
+    echo "<i>";
+    $my_file = file_get_contents("problem01.txt");
+
+    echo $my_file;
+    echo "</i>";
+    ?>
     </p>
 </div>
 </body>
