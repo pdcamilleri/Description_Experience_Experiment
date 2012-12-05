@@ -1,7 +1,24 @@
 <?php 
+
+// if you want to change this from 100 to something else,
+// just change it here, the rest of this code should still work
+define("NUM_OUTCOMES_PER_ALTERNATIVE", 3);
+
 //header('Content-Type: application/json');
 // this is an array variable. it will hold arrays itself. this makes it a 2d array.
+// except that those arrays will also hold arrays, so its a 3d array.
 $bigArray = array();
+// this will allow us to store the entire csv file in a nice format
+// $bigArray[0] will refer to the 1st choice set in the csv file, ie the first row (ignoring the initial row of AlternativeA - OutcomeX stuff)
+// $bigArray[0][0] will refer to the distribution of outcomes for AlternativeA for choice set 1
+// $bigArray[0][1] will refer ...                                 AlternativeB for choice set 1
+// $bigArray[0][2] will refer ...                                 AlternativeC for choice set 1
+// and finally
+// $bigArray[0][0][0] will refer to Outcome1 for AlternativeA for choice set 1.
+// so really its $bigArray[choice set][alternative][outcome]
+// its complicated, but by storing everything in this way, it will easily work if you add more choice sets, or a 4th alternative, or whatever.
+
+
 $row = 1;
 // open the file "outcomes.csv" for reading (the "r"), we will access the file using the $file variable
 // if the file is not present, fopen will return FALSE, and so the loop will not execute
@@ -21,7 +38,7 @@ if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
       array_shift($data);
       // so now the array contains only numbers, just what we want.
       // so lets adds this to the end of our big array using push
-      array_push($bigArray, $data);
+      array_push($bigArray, array_chunk($data, NUM_OUTCOMES_PER_ALTERNATIVE));
    }
    // close the file
    fclose($file);
@@ -35,4 +52,5 @@ if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
 
 // so we are done, just need to send this array back to the webpage
 echo json_encode($bigArray);
+//print_r($bigArray);
 ?>

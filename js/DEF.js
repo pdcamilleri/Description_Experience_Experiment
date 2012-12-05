@@ -22,8 +22,9 @@ $.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) 
 });
 
 function displayStuff(me) {
-   me.innerHTML = problemData[0][counters[0]];
-   counters[0]++;
+   var index = me.getAttribute("index");
+   me.innerHTML = problemData[0][index][counters[index]];
+   counters[index]++;
 }
 
 //alert(array);
