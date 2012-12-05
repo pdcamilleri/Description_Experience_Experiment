@@ -22,15 +22,17 @@
             <?php
             // we generate the buttons using PHP because we want the number of buttons to be able to change. 2, 3, or more...
             $num = 0;
+            $char = 'A';
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < 3; $i++) {
-               echo "<button type='submit' class='myButton' id='button_$num' index='$num' onclick='displayButtonValue(this)'></button>";
+               echo "<button type='submit' class='myButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
                // note the id is button_$num, where $num is a variable.
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
 
                // now i want each button to have a different id, so increase the value of the variable $num
                $num++;
+               $char++;
             }
             ?>
             <p>

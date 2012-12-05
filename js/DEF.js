@@ -1,3 +1,6 @@
+// 2 second timeout
+var TIMEOUT_LENGTH = 2;
+// 3d array. will use it to store the 3d array created by getproblemdata.php
 var problemData = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
 var counters = [];
@@ -16,7 +19,7 @@ window.onload = function start() {
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {
       $.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) {
-         problemData = data;
+            problemData = data;
          }, 
          'json' 
          );
@@ -34,11 +37,12 @@ function displayButtonValue(button) {
    // here, the . means search all classes. if i wanted to get an element by id, i would use #.
    // this works the same as it does in css
    $(".myButton").each(function() {
+         // $(this) refers to the current object which will be a button
          $(this).attr("disabled", true);
    });
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(doFancyStuff, 1000, problemData[choiceSetCounter][index][counters[index]]);
+   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, problemData[choiceSetCounter][index][counters[index]]);
 
    counters[index]++;
    if (counters[index] == 3) {
@@ -51,10 +55,14 @@ function doFancyStuff(value) {
    // enable buttons
    $(".myButton").each(function() {
          $(this).attr("disabled", false);
+         // we changed the button text to display the value, now change it back
+         $(this).html($(this).attr('name'));
    });
 
+   // update the score
+   // a little hacky since the score is considered to be text and not numerical
    var currentScore = document.getElementById("currentScore");
-   currentScore.innerHTML = parseFloat(currentScore.innerHTML) + parseFloat(value);
+   currentScore.innerHTML = (parseFloat(currentScore.innerHTML) + parseFloat(value)).toFixed(1);
 
    // visually updates the total score
    // TODO
