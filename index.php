@@ -15,9 +15,9 @@ $_SESSION['homepage_visit'] = true;
     <script src="jquery/jquery.js"></script>
     <script type="text/javascript">
     function getnextvalue() {
-       $.get("http://localhost/~pdc/Exp11g/problem01.txt", function(data, status) {
-             alert(data);
-          } 
+       $.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) {
+             alert(data[0][0]);
+          }, 'json' 
              
        );
 
