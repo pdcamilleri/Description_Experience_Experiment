@@ -1,33 +1,64 @@
 var problemData = new Array();
-// an array to hold a counter variable, indicating where we are up to in each distribution.
+// an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
 var counters = [];
+var choiceSetCounter = 0; // indicates which choice set we are up to (in other words, which line in the csv file)
 
-    // execute this function when the window loads
-    window.onload = function start() {
+// execute this function when the window loads
+window.onload = function start() {
 
-       // initialise the counters array with 0's depending on how many buttons we are dealing with
-     var length = document.getElementsByClassName("myButton").length;
-     for(var i = 0; i < length; i++) {
-            counters[i] = 0;
-     }
-    };
+   // initialise the counters array with 0's depending on how many buttons we are dealing with
+   var length = document.getElementsByClassName("myButton").length;
+   for(var i = 0; i < length; i++) {
+      counters[i] = 0;
+   }
+};
 
-// when the page has loaded, go and grab the problem data
+// when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {
-$.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) {
-                                                                              problemData = data;
-                                                                       }, 
-                 'json' 
-               );
-});
+      $.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) {
+         problemData = data;
+         }, 
+         'json' 
+         );
+      });
 
-function displayStuff(me) {
-   var index = me.getAttribute("index");
-   me.innerHTML = problemData[0][index][counters[index]];
+// displays the next result in the button
+function displayButtonValue(button) {
+   // first we get the index of this button into our various arrays
+   var index = button.getAttribute("index");
+   button.innerHTML = problemData[choiceSetCounter][index][counters[index]];
+
+   // disabled all the buttons. this is using jquery. its the same as if i were to 
+   // do something like document.getElementByClassName("myButton")[0].disabled = true;
+   // this $(".myButton") syntax is just a quicker way of accessing multiple elements using jquery.
+   // here, the . means search all classes. if i wanted to get an element by id, i would use #.
+   // this works the same as it does in css
+   $(".myButton").each(function() {
+         $(this).attr("disabled", true);
+   });
+
+   // we have disabled the buttons, now cause a timeout
+   setTimeout(doFancyStuff, 1000, problemData[choiceSetCounter][index][counters[index]]);
+
    counters[index]++;
+   if (counters[index] == 3) {
+      counters[index] = 0;
+   }
 }
 
-//alert(array);
+// visually update the counter
+function doFancyStuff(value) {
+   // enable buttons
+   $(".myButton").each(function() {
+         $(this).attr("disabled", false);
+   });
+
+   var currentScore = document.getElementById("currentScore");
+   currentScore.innerHTML = parseFloat(currentScore.innerHTML) + parseFloat(value);
+
+   // visually updates the total score
+   // TODO
+}
 
 /*
     //Note the details of the game

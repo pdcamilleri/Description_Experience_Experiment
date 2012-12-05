@@ -24,7 +24,7 @@
             $num = 0;
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < 3; $i++) {
-               echo "<button type='submit' class='myButton' id='button_$num' index='$num' onclick='displayStuff(this)'></button>";
+               echo "<button type='submit' class='myButton' id='button_$num' index='$num' onclick='displayButtonValue(this)'></button>";
                // note the id is button_$num, where $num is a variable.
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
@@ -34,7 +34,7 @@
             }
             ?>
             <p>
-               <span id="currentScore"></span>
+               <span id="currentScore">0</span>
             </p>
          </div>
 
