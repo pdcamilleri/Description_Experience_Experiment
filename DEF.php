@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head>
@@ -26,7 +27,7 @@
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < 3; $i++) {
                echo "<button type='submit' class='myButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
-               // note the id is button_$num, where $num is a variable.
+               // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
 
