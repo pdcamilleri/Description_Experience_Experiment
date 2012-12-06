@@ -6,6 +6,7 @@ var problemData = new Array();
 var counters = [];
 var choiceSetCounter = 0; // indicates which choice set we are up to (in other words, which line in the csv file)
 var makingFinalChoice = false;
+var finalChoices = [];
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -28,21 +29,26 @@ $(document).ready(function() {
 
 // displays the next result in the button
 function displayButtonValue(button) {
+   // first we get the index of this button into our various arrays
+   var index = button.getAttribute("index");
+   // TODO make this a function so AC can easily change to an iterative version
+   // get a random element from the distribution
+   var randomElement = problemData[choiceSetCounter][index][Math.floor(Math.random() * problemData[choiceSetCounter][index].length)];
+
    if (makingFinalChoice) {
       makingFinalChoice = false;
-      recordFinalChoice(button);
+      recordFinalChoice(button.name, randomElement);
       // get rid of the overlay, brighten up the page
       document.getElementById("overlay").className = '';
       return;
    }
-   // first we get the index of this button into our various arrays
-   var index = button.getAttribute("index");
-   button.innerHTML = problemData[choiceSetCounter][index][counters[index]];
+
+   button.innerHTML = randomElement;
 
    // disabled all the buttons. this is using jquery. its the same as if i were to 
    // do something like document.getElementByClassName("myButton")[0].disabled = true;
    // this $(".myButton") syntax is just a quicker way of accessing multiple elements using jquery.
-   // here, the . means search all classes. if i wanted to get an element by id, i would use #.
+   // here, the . in ".myButton"  means search all classes. if i wanted to get an element by id, i would use #.
    // this works the same as it does in css
    $(".myButton").each(function() {
          // $(this) refers to the current object which will be a button
@@ -89,7 +95,12 @@ function makeFinalChoice(button) {
 
 }
 
-function recordFinalChoice(asd) {
+function recordFinalChoice(choice, value) {
+   // record their choice
+   finalChoices.push(choice);
+   // update their overall score
+   // overallScore += parseFloat(value).toFixed(1);
+   alert("You chose " + choice + " which returned a value of " + value);
    return;
 }
 
