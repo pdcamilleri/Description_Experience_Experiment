@@ -16,6 +16,8 @@ window.onload = function start() {
    for(var i = 0; i < length; i++) {
       counters[i] = 0;
    }
+   initiateSliders();
+   
 };
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
@@ -102,6 +104,72 @@ function recordFinalChoice(choice, value) {
    // overallScore += parseFloat(value).toFixed(1);
    alert("You chose " + choice + " which returned a value of " + value);
    return;
+}
+
+
+function initiateSliders() {
+        var sliders = $("#sliders .ui-slider");
+        sliders.slider({ 
+			value:50,
+			min: 0,
+			max: 100,
+			step: 1,
+			slide: function( event, ui ) {
+            // siblings refers to the span element paired with each slider
+            $(this).siblings().text(ui.value);
+
+            var total = 0;
+            // sums up the total value of each slider that is not the current slider
+            sliders.not(this).each(function() {
+               total += $(this).slider("option", "value");
+            });
+
+            // Need to do this because apparently jQ UI
+            // does not update value until this event completes
+            total += ui.value;
+
+            // show the value to the user
+            $("#sliderScore").html(total + '%');
+
+            // update the color if the sliders total to 100%
+            if (total == 100) {
+               $("#sliderScore").css('color','#00ff00');
+            } else {
+               $("#sliderScore").css('color','#ff0000');
+            }
+
+            // TODO
+            // should enable a submit button too, that is disabled when the total != 100
+            // then save the values in that submit buttons onclick/onsubmit
+            // also fix up styling and make columns of sliders
+
+         /*
+				    leftOutcomeAllocation = 100-ui.value
+                rightOutcomeAllocation = ui.value
+                $( "#sliderAmountLeft" ).val(leftButtonLabel[problemCount] + ": " + leftOutcomeAllocation);
+                $( "#sliderAmountRight" ).val(rightButtonLabel[problemCount] + ": " + rightOutcomeAllocation);
+         */
+			}
+		}); 
+        
+        //$( "#sliderAmountLeft" ).val(leftButtonLabel[problemCount] + ": 0"  );
+        //$( "#sliderAmountRight" ).val(rightButtonLabel[problemCount] + ": 0" );
+              
+        
+        //$('.ui-slider').addClass("ui-slider-handle2");
+        //handle = $('#slider A.ui-slider-handle');
+        //handle.addClass("ui-slider-handle2");
+        //handle2 = $('#slider A.ui-state-default');
+        //handle2.addClass("ui-state-default2"); 
+         
+        /*
+        $( "#slider" ).slider({
+            start: function(event, ui) {
+            handle.removeClass("ui-slider-handle2");
+            handle.removeClass("ui-state-default2");
+            }
+        });    
+        */
 }
 
 /*

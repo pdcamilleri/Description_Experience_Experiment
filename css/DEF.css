@@ -126,3 +126,6 @@ should clean it up
                      z-index: 1001;
 }
 
+.slider {
+   margin: 10px 10px;
+}

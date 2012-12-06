@@ -43,28 +43,39 @@
 
 
          <button type='submit' class='myButton' id='finalAnswer' name="Make final choice" onclick='makeFinalChoice(this)'>Make final choice</button>
+         <ul id="sliders">
 
+            <?php
+
+               $max = 0;
+               if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
+                  // get rid of first line
+                  fgetcsv($file, 0, ",");
+                  while (($data = fgetcsv($file, 0, ",")) !== FALSE) {
+                     // get rid of leading column
+                     array_shift($data);
+                     $currentLength = count(array_unique($data));
+                     if ($max < $currentLength) {
+                        $max = $currentLength;
+                     } 
+                  }
+                  fclose($file);
+               }
+               $max = 5;
+               for ($i = 0; $i < $max; $i++) {
+                  echo '<li>
+                           <div class="ui-slider"></div>
+                           <span class="value">0</span>
+                        </li>';
+                  //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
+               }
+            ?>
+            <p>
+               <span id="sliderScore">0</span>
+            </p>
+         </ul>
+ 
       </div>
-      <?php
-
-         $max = 0;
-         if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
-            // get rid of first line
-            fgetcsv($file, 0, ",");
-            while (($data = fgetcsv($file, 0, ",")) !== FALSE) {
-               // get rid of leading column
-               array_shift($data);
-               $currentLength = count(array_unique($data));
-               if ($max < $currentLength) {
-                  $max = $currentLength;
-               } 
-            }
-            fclose($file);
-         }
-         for ($i = 0; $i < $max; $i++) {
-            echo '<div hidden id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> </div>';
-         }
-      ?>
 
       <div id="overlay"></div>
 
