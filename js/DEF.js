@@ -133,9 +133,11 @@ function initiateSliders() {
 
             // update the color if the sliders total to 100%
             if (total == 100) {
-               $("#sliderScore").css('color','#00ff00');
+               $("#sliderScore").css('color','green');
+               //$("#sliderScore").css('color','#00ff00');
             } else {
-               $("#sliderScore").css('color','#ff0000');
+               $("#sliderScore").css('color','red');
+               //$("#sliderScore").css('color','#ff0000');
             }
 
             // TODO
