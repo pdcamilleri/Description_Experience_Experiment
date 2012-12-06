@@ -40,6 +40,11 @@
             </p>
          </div>
 
+
+         <button type='submit' class='myButton' id='finalAnswer' name="Make Final Choice" onclick='makeFinalChoice(this)'>Make final choice</button>
+
       </div>
+      <div id="overlay"></div>
+
    </body>
 </html>

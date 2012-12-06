@@ -5,6 +5,7 @@ var problemData = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
 var counters = [];
 var choiceSetCounter = 0; // indicates which choice set we are up to (in other words, which line in the csv file)
+var makingFinalChoice = false;
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -27,6 +28,13 @@ $(document).ready(function() {
 
 // displays the next result in the button
 function displayButtonValue(button) {
+   if (makingFinalChoice) {
+      makingFinalChoice = false;
+      recordFinalChoice(button);
+      // get rid of the overlay, brighten up the page
+      document.getElementById("overlay").className = '';
+      return;
+   }
    // first we get the index of this button into our various arrays
    var index = button.getAttribute("index");
    button.innerHTML = problemData[choiceSetCounter][index][counters[index]];
@@ -66,6 +74,23 @@ function doFancyStuff(value) {
 
    // visually updates the total score
    // TODO
+}
+
+
+function makeFinalChoice(button) {
+
+   // first we enable the overlay to darken the page
+   document.getElementById("overlay").className = 'overlay';
+   // we could do the same thing using jquery
+   // $("#overlay").addClass("overlay");
+   
+   // need to toggle the javascript called by the buttons to now record a final answer
+   makingFinalChoice = true;
+
+}
+
+function recordFinalChoice(asd) {
+   return;
 }
 
 /*

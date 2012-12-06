@@ -97,6 +97,8 @@ should clean it up
         width:200px;
     	text-decoration:none;
     	text-shadow:1px 0px 0px #ffffff;
+      z-index:1002;
+      position:relative
         }
     .myButton:hover {
     	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
@@ -109,3 +111,18 @@ should clean it up
     	top:1px;
         }
 	
+#finalAnswer {
+   z-index:1000;
+}
+
+.overlay {
+   position:fixed;
+   top:0px;
+   bottom:0px;
+   left:0px;
+   right:0px;
+         background-color: rgb(0, 0, 0);
+   opacity: 0.8; display: block;
+                     z-index: 1001;
+}
+
