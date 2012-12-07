@@ -97,7 +97,6 @@ should clean it up
         width:200px;
     	text-decoration:none;
     	text-shadow:1px 0px 0px #ffffff;
-      z-index:1002;
       position:relative
         }
     .myButton:hover {
@@ -110,6 +109,11 @@ should clean it up
     	position:relative;
     	top:1px;
         }
+/* only put the choice buttons on top of the overlay */
+.choiceButton {
+      z-index:1002;
+}
+
 	
 #finalAnswer {
    z-index:1000;

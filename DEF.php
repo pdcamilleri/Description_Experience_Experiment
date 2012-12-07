@@ -19,6 +19,9 @@
          Decision-making Game
          </p>
 
+         <p class="expInfo" id="problem"> Problem: <span class="number"> 1 </span> </p>
+         <p class="expInfo"   id="trial"> Trial:   <span class="number"> 1 </span> </p>
+
          <div id="choiceButtons">
             <?php
 
@@ -30,7 +33,7 @@
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < $numOptions; $i++) {
                echo "<div>";
-               echo "<button type='submit' class='myButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
+               echo "<button type='submit' class='myButton choiceButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
                // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
