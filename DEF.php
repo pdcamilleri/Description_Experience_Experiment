@@ -23,6 +23,12 @@
          <p class="expInfo"   id="trial"> Trial:   <span class="number"> 1 </span> </p>
 
          <div id="choiceButtons">
+
+         <table>
+         <tbody>
+         <tr>
+
+
             <?php
 
             $numOptions = 3;
@@ -32,27 +38,47 @@
             $char = 'A';
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < $numOptions; $i++) {
+               echo "<td>";
                echo "<div>";
                echo "<button type='submit' class='myButton choiceButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
                // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
 
+               echo "</div>";
+               echo "</td>";
+               // now i want each button to have a different id, so increase the value of the variable $num
+               $num++;
+               $char++;
+            }
+               echo "</tr>";
+               echo "<tr>";
+
+
+            // a row underneath to display the score for each button
+            for ($i = 0; $i < $numOptions; $i++) {
+               echo "<td>";
                echo "
                   <p>
                      <span class='score' id='buttonScore_$i'>???</span>
                   </p>
                ";
-               echo "</div>";
-               // now i want each button to have a different id, so increase the value of the variable $num
-               $num++;
-               $char++;
+               echo "</td>";
             }
+
             ?>
-            <p>
-               <span id="currentScore">0</span>
-            </p>
          </div>
+
+
+         </tr>
+         </tbody>
+         </table>
+         <p>
+            <span id="currentScore">0</span>
+         </p>
+
+
+
 
 
          <button type='submit' class='myButton' id='finalAnswer' name="Make final choice" onclick='makeFinalChoice(this)'>Make final choice</button>

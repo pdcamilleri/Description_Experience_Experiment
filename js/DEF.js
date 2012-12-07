@@ -47,8 +47,7 @@ function displayButtonValue(button) {
       return;
    }
 
-   //button.innerHTML = randomElement;
-   $("#" + button.id).siblings().find(".score").html(randomElement);
+   $("#buttonScore_" + button.getAttribute('index')).html(randomElement);
 
    // disabled all the buttons. this is using jquery. its the same as if i were to 
    // do something like document.getElementByClassName("myButton")[0].disabled = true;
@@ -76,6 +75,7 @@ function doFancyStuff(value) {
          $(this).attr("disabled", false);
    });
 
+   // reset all the scores
    $(".score").html("???");
 
    // update the score
