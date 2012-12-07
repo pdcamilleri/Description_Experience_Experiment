@@ -24,7 +24,7 @@ window.onload = function start() {
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {
-      $.get("http://localhost/~pdc/Exp11g/getproblemdata.php", function(data, status) {
+      $.get("getproblemdata.php", function(data, status) {
             problemData = data;
          }, 
          'json' 
@@ -113,9 +113,9 @@ function initiateSliders() {
 
       disableSliderSubmit();
 
-        var sliders = $("#sliders .ui-slider");
+        var sliders = $(".sliders .ui-slider");
         sliders.slider({ 
-			value:50,
+			value:0,
 			min: 0,
 			max: 100,
 			step: 1,
@@ -125,7 +125,8 @@ function initiateSliders() {
 
             var total = 0;
             // sums up the total value of each slider that is not the current slider
-            sliders.not(this).each(function() {
+            // (probably/definately a better way to do this)
+            $(this).parent().parent().find(".ui-slider").not(this).each(function() {
                total += $(this).slider("option", "value");
             });
 
@@ -134,28 +135,47 @@ function initiateSliders() {
             total += ui.value;
 
             // show the value to the user
-            $("#sliderScore").html(total + '%');
+
+            // first get the score associated with this series of sliders
+            var sliderScore = $(this).parent().parent().parent().find(".sliderScore");
+            sliderScore.html(total + '%');
 
             // update the color if the sliders total to 100%
             if (total == 100) {
-               $("#sliderScore").css('color','green');
+               sliderScore.css('color','green');
                //$("#sliderScore").css('color','#00ff00');
-
-               enableSliderSubmit();
             } else {
-               $("#sliderScore").css('color','red');
+               sliderScore.css('color','red');
                //$("#sliderScore").css('color','#ff0000');
-
-               disableSliderSubmit();
-               // disable the slider
             }
 
             // TODO
             // also fix up styling and make columns of sliders
 
+            // see if we should enable the submit button
+            checkSliderTotals();
+
 			}
 		}); 
         
+}
+
+function checkSliderTotals() {
+   var allSlidersAre100 = true;
+   
+   // check all the sliders. if just one is off, disable the submit button
+   $(".sliderScore").each(function() {
+         if ($(this).html() != '100%') {
+            allSlidersAre100 = false;
+         }
+   });
+
+   if (allSlidersAre100) {
+      enableSliderSubmit();
+   } else {
+      disableSliderSubmit();
+   }
+
 }
 
 function disableSliderSubmit() {
@@ -171,7 +191,7 @@ function enableSliderSubmit() {
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
    var sliderVals = [];
-   $("#sliders .ui-slider").each(function() {
+   $(".sliders .ui-slider").each(function() {
       sliderVals.push($(this).slider("option", "value"));
    });
 

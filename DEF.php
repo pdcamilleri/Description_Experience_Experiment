@@ -21,11 +21,14 @@
 
          <div id="choiceButtons">
             <?php
+
+            $numOptions = 3;
+
             // we generate the buttons using PHP because we want the number of buttons to be able to change. 2, 3, or more...
             $num = 0;
             $char = 'A';
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
-            for ($i = 0; $i < 3; $i++) {
+            for ($i = 0; $i < $numOptions; $i++) {
                echo "<button type='submit' class='myButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
                // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
@@ -43,7 +46,9 @@
 
 
          <button type='submit' class='myButton' id='finalAnswer' name="Make final choice" onclick='makeFinalChoice(this)'>Make final choice</button>
-         <ul id="sliders">
+         <table>
+         <tbody>
+         <tr>
 
             <?php
 
@@ -61,21 +66,33 @@
                   }
                   fclose($file);
                }
-               $max = 5;
-               for ($i = 0; $i < $max; $i++) {
-                  echo '<li>
-                           <div class="ui-slider"></div>
-                           <span class="value">0</span>
-                        </li>';
-                  //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
+
+               // print a series of sliders for each column
+               for ($j = 0; $j < $numOptions; $j++) {
+                  echo "<td>";
+                  echo "<ul class='sliders' id='sliders_$j'>";
+                  $max = 5;
+                  for ($i = 0; $i < $max; $i++) {
+                     echo '<li>
+                              <div class="ui-slider"></div>
+                              <span class="value">0</span>
+                           </li>';
+                     //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
+                  }
+                  echo "</ul>";
+                  echo "<p>
+                        <span class='sliderScore' id='sliderScore_$j'>0</span>
+                        </p>";
+         
+                  echo "</td>";
                }
             ?>
-            <p>
-               <span id="sliderScore">0</span>
-               <button type='submit' class='myButton' id='sliderFinalAnswer' name="Make final choice" onclick='submitSliderChoice(this)'>Submit slider choice</button>
-            </p>
-         </ul>
+
+         </tr>
+         </tbody>
+         </table>
  
+         <button type='submit' class='myButton' id='sliderFinalAnswer' name="Make final choice" onclick='submitSliderChoice(this)'>Submit slider choice</button>
       </div>
 
       <div id="overlay"></div>
