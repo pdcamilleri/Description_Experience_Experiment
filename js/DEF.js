@@ -7,6 +7,7 @@ var counters = [];
 var choiceSetCounter = 0; // indicates which choice set we are up to (in other words, which line in the csv file)
 var makingFinalChoice = false;
 var finalChoices = [];
+var sliderChoices = [];
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -17,6 +18,7 @@ window.onload = function start() {
       counters[i] = 0;
    }
    initiateSliders();
+
    
 };
 
@@ -108,6 +110,9 @@ function recordFinalChoice(choice, value) {
 
 
 function initiateSliders() {
+
+      disableSliderSubmit();
+
         var sliders = $("#sliders .ui-slider");
         sliders.slider({ 
 			value:50,
@@ -135,45 +140,45 @@ function initiateSliders() {
             if (total == 100) {
                $("#sliderScore").css('color','green');
                //$("#sliderScore").css('color','#00ff00');
+
+               enableSliderSubmit();
             } else {
                $("#sliderScore").css('color','red');
                //$("#sliderScore").css('color','#ff0000');
+
+               disableSliderSubmit();
+               // disable the slider
             }
 
             // TODO
-            // should enable a submit button too, that is disabled when the total != 100
-            // then save the values in that submit buttons onclick/onsubmit
             // also fix up styling and make columns of sliders
 
-         /*
-				    leftOutcomeAllocation = 100-ui.value
-                rightOutcomeAllocation = ui.value
-                $( "#sliderAmountLeft" ).val(leftButtonLabel[problemCount] + ": " + leftOutcomeAllocation);
-                $( "#sliderAmountRight" ).val(rightButtonLabel[problemCount] + ": " + rightOutcomeAllocation);
-         */
 			}
 		}); 
         
-        //$( "#sliderAmountLeft" ).val(leftButtonLabel[problemCount] + ": 0"  );
-        //$( "#sliderAmountRight" ).val(rightButtonLabel[problemCount] + ": 0" );
-              
-        
-        //$('.ui-slider').addClass("ui-slider-handle2");
-        //handle = $('#slider A.ui-slider-handle');
-        //handle.addClass("ui-slider-handle2");
-        //handle2 = $('#slider A.ui-state-default');
-        //handle2.addClass("ui-state-default2"); 
-         
-        /*
-        $( "#slider" ).slider({
-            start: function(event, ui) {
-            handle.removeClass("ui-slider-handle2");
-            handle.removeClass("ui-state-default2");
-            }
-        });    
-        */
 }
 
+function disableSliderSubmit() {
+   document.getElementById("sliderFinalAnswer").disabled = true;
+   document.getElementById("sliderFinalAnswer").style.color = 'grey';
+}
+
+function enableSliderSubmit() {
+   document.getElementById("sliderFinalAnswer").disabled = false;
+   document.getElementById("sliderFinalAnswer").style.color = '';
+}
+
+// saves the current value of all the sliders in the main slider array
+function submitSliderChoice(button) {
+   var sliderVals = [];
+   $("#sliders .ui-slider").each(function() {
+      sliderVals.push($(this).slider("option", "value"));
+   });
+
+   sliderChoices.push(sliderVals);
+
+}   
+   
 /*
     //Note the details of the game
     var totalProblems = 16;

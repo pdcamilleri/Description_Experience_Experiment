@@ -72,6 +72,7 @@
             ?>
             <p>
                <span id="sliderScore">0</span>
+               <button type='submit' class='myButton' id='sliderFinalAnswer' name="Make final choice" onclick='submitSliderChoice(this)'>Submit slider choice</button>
             </p>
          </ul>
  
