@@ -47,7 +47,8 @@ function displayButtonValue(button) {
       return;
    }
 
-   button.innerHTML = randomElement;
+   //button.innerHTML = randomElement;
+   $("#" + button.id).siblings().find(".score").html(randomElement);
 
    // disabled all the buttons. this is using jquery. its the same as if i were to 
    // do something like document.getElementByClassName("myButton")[0].disabled = true;
@@ -73,9 +74,9 @@ function doFancyStuff(value) {
    // enable buttons
    $(".myButton").each(function() {
          $(this).attr("disabled", false);
-         // we changed the button text to display the value, now change it back
-         $(this).html($(this).attr('name'));
    });
+
+   $(".score").html("???");
 
    // update the score
    // a little hacky since the score is considered to be text and not numerical
@@ -84,6 +85,9 @@ function doFancyStuff(value) {
 
    // visually updates the total score
    // TODO
+   // using jquery.animate() and parametric version of line between two points
+   // (x, y) = A + (B-A)t
+   // perhaps we only want 0.2 < t < 0.8 so no text overlaps
 }
 
 

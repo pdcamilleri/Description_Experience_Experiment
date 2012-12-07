@@ -132,4 +132,12 @@ should clean it up
 
 li {
    list-style: none;
+
 }
+
+
+.ui-slider-horizontal { 
+   height: .8em; 
+   width:  9em;
+}
+
