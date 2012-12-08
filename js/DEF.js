@@ -9,6 +9,7 @@ var makingFinalChoice = false;
 var finalChoices = [];
 var sliderChoices = [];
 var trialNumber = 1;
+var problemNumber = 1;
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -69,14 +70,15 @@ function displayButtonValue(button) {
    }
 
    setTrialNumber(getTrialNumber() + 1);
-   $("#buttonScore_" + button.getAttribute('index')).html(randomElement);
 }
 
 function setTrialNumber(value) {
+   // fix this to use the actual var trialNumber
    $("#trial > .number").html(value);
 }
 
 function getTrialNumber() {
+   //return trialNumber;
    return parseInt($("#trial > .number").html());
 }
 
@@ -119,10 +121,16 @@ function makeFinalChoice(button) {
 }
 
 function setProblemNumber(value) {
-   $("#problem> .number").html(value);
+   // TODO
+   // change this to merely update the variable
+   // then have someother method take this information and update the entire page
+   // should do this for more things
+   // and have them all in an update()
+   $("#problem > .number").html(value);
 }
 
 function getProblemNumber() {
+   //return problemNumber;
    return parseInt($("#problem > .number").html());
 }
 
@@ -132,6 +140,12 @@ function recordFinalChoice(choice, value) {
    // update their overall score
    // overallScore += parseFloat(value).toFixed(1);
    alert("You chose " + choice + " which returned a value of " + value);
+
+   choiceSetCounter++;
+   if (choiceSetCounter == 3) {
+      choiceSetCounter = 0;
+   }
+
    return;
 }
 
