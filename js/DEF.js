@@ -8,6 +8,7 @@ var choiceSetCounter = 0; // indicates which choice set we are up to (in other w
 var makingFinalChoice = false;
 var finalChoices = [];
 var sliderChoices = [];
+var trialNumber = 1;
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -66,6 +67,17 @@ function displayButtonValue(button) {
    if (counters[index] == 3) {
       counters[index] = 0;
    }
+
+   setTrialNumber(getTrialNumber() + 1);
+   $("#buttonScore_" + button.getAttribute('index')).html(randomElement);
+}
+
+function setTrialNumber(value) {
+   $("#trial > .number").html(value);
+}
+
+function getTrialNumber() {
+   return parseInt($("#trial > .number").html());
 }
 
 // visually update the counter
@@ -88,8 +100,8 @@ function doFancyStuff(value) {
    // using jquery.animate() and parametric version of line between two points
    // (x, y) = A + (B-A)t
    // perhaps we only want 0.2 < t < 0.8 so no text overlaps
-}
 
+}
 
 function makeFinalChoice(button) {
 
@@ -101,6 +113,17 @@ function makeFinalChoice(button) {
    // need to toggle the javascript called by the buttons to now record a final answer
    makingFinalChoice = true;
 
+   // TODO check when exactly to update this variable
+   // update problem number
+   setProblemNumber(getProblemNumber() + 1);
+}
+
+function setProblemNumber(value) {
+   $("#problem> .number").html(value);
+}
+
+function getProblemNumber() {
+   return parseInt($("#problem > .number").html());
 }
 
 function recordFinalChoice(choice, value) {
