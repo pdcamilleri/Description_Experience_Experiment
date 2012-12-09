@@ -34,13 +34,12 @@
             $numOptions = 3;
 
             // we generate the buttons using PHP because we want the number of buttons to be able to change. 2, 3, or more...
-            $num = 0;
             $char = 'A';
             // TODO need to allow this value 2 to be specified somehow to allow for 3 options
             for ($i = 0; $i < $numOptions; $i++) {
                echo "<td>";
                echo "<div>";
-               echo "<button type='submit' class='myButton choiceButton' id='button_$num' index='$num' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
+               echo "<button type='submit' class='myButton choiceButton' id='button_$i' index='$i' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
                // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
@@ -48,7 +47,6 @@
                echo "</div>";
                echo "</td>";
                // now i want each button to have a different id, so increase the value of the variable $num
-               $num++;
                $char++;
             }
                echo "</tr>";
@@ -109,10 +107,11 @@
                   echo "<ul class='sliders' id='sliders_$j'>";
                   $max = 5;
                   for ($i = 0; $i < $max; $i++) {
-                     echo '<li>
-                              <div class="ui-slider"></div>
-                              <span class="value">0</span>
-                           </li>';
+                     echo "<li>
+                              <span class='outcomeValues'> ? </span>
+                              <div class='ui-slider'> </div>
+                              <span class='value'>0</span>
+                           </li>";
                      //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
                   }
                   echo "</ul>";

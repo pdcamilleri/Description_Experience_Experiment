@@ -21,16 +21,21 @@ window.onload = function start() {
    }
    initiateSliders();
 
-   
 };
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {
       $.get("getproblemdata.php", function(data, status) {
             problemData = data;
+
+            // TODO
+            // find better place to put this
+            populateOutcomeValuesInSlider();
+   
          }, 
          'json' 
          );
+
       });
 
 // displays the next result in the button
@@ -141,10 +146,14 @@ function recordFinalChoice(choice, value) {
    // overallScore += parseFloat(value).toFixed(1);
    alert("You chose " + choice + " which returned a value of " + value);
 
+
+   // TODO
+   // probably put a load new problem thing in here
    choiceSetCounter++;
    if (choiceSetCounter == 3) {
       choiceSetCounter = 0;
    }
+
 
    return;
 }
@@ -238,7 +247,47 @@ function submitSliderChoice(button) {
 
    sliderChoices.push(sliderVals);
 
+   populateOutcomeValuesInSlider();
+
 }   
+
+// TODO
+// better name
+// this function sets the outcomes for the sliders to correspond to the particular choice set/problem
+function populateOutcomeValuesInSlider() {
+
+   // all the values are in problemData[choiceSetCounter][0/1/2][0..end]
+   var length = problemData[choiceSetCounter].length;
+   for (var i = 0; i < length; i++) {
+
+      // unhide all the sliders, in case some were hidden for the previous problem 
+      $("#sliders_" + i).children().show();
+
+      // get the unique elements present in the outcomes array and assign these to the sliders
+      var uniqueArray = unique(problemData[choiceSetCounter][i]);
+      var outcomeValues = $("#sliders_" + i).find(".outcomeValues"); 
+      for (var j = 0; j < uniqueArray.length; j++) {
+         outcomeValues[j].innerHTML = uniqueArray[j];
+      }
+
+      // hide the sliders that are not used
+      $("#sliders_" + i).children().slice(uniqueArray.length).hide();
+
+   }
+
+}
+
+// http://stackoverflow.com/a/1890233 
+function unique(arr) {
+   var hash = {}, result = [];
+   for ( var i = 0, l = arr.length; i < l; ++i ) {
+      if ( !hash.hasOwnProperty(arr[i]) ) { //it works with objects! in FF, at least
+         hash[ arr[i] ] = true;
+         result.push(arr[i]);
+      }
+   }
+   return result;
+}
    
 /*
     //Note the details of the game
