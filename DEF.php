@@ -113,7 +113,6 @@
                      echo "<li>
                               <span class='outcomeValues'> ? </span>
                               <div class='ui-slider'> </div>
-                              <span class='value'>0</span>
                            </li>";
                      //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
                   }

@@ -146,7 +146,7 @@ function recordFinalChoice(choice, value) {
    finalChoices.push(choice);
    // update their overall score
    // overallScore += parseFloat(value).toFixed(1);
-   alert("You chose " + choice + " which returned a value of " + value);
+   //alert("You chose " + choice + " which returned a value of " + value);
    
    // show the estimate phase (the sliders), hide explore phase
    $(".explore").toggle();
@@ -176,8 +176,12 @@ function initiateSliders() {
 			max: 100,
 			step: 1,
 			slide: function( event, ui ) {
-            // siblings refers to the span element paired with each slider
-            $(this).siblings(".value").text(ui.value);
+            // here we set this to the current value of the slider
+            // based off http://jsfiddle.net/elijahmanor/dLq5B/
+            var slider = $( this ).data().slider;
+            slider.element.find( ".ui-slider-handle" ).text( ui.value );
+
+
 
             var total = 0;
             // sums up the total value of each slider that is not the current slider
@@ -213,6 +217,9 @@ function initiateSliders() {
 
 			}
 		}); 
+
+      // set the initial value of the slider to be 0
+      $(".ui-slider-handle").text("0");
         
 }
 
@@ -256,6 +263,7 @@ function submitSliderChoice(button) {
    // reset the sliders to r
    $(".ui-slider").slider("value", 0);
    $(".sliderScore").html("0%").css('color', 'red');
+   $(".ui-slider-handle").text("0");
 
 
 

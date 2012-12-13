@@ -145,3 +145,17 @@ li {
    width:  9em;
 }
 
+
+/* based up http://jsfiddle.net/pxfunc/D7b7F/ */
+/*.sliderDiv {background-color:#f9f9f9;border:solid 1px #ddd;padding:10px;}
+.sliderDiv span {}
+#outcomeValues {float:right;width:80%;}
+*/
+
+
+/* styling for the moving handle bit of the slider */
+.ui-slider-handle {
+   text-decoration: none;
+   width: 45px;
+   text-align: center;
+}
