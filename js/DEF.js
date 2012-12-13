@@ -20,7 +20,7 @@ window.onload = function start() {
       counters[i] = 0;
    }
    initiateSliders();
-
+   
 };
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
@@ -50,7 +50,8 @@ function displayButtonValue(button) {
       makingFinalChoice = false;
       recordFinalChoice(button.name, randomElement);
       // get rid of the overlay, brighten up the page
-      document.getElementById("overlay").className = '';
+      //document.getElementById("overlay").className = '';
+      $("#overlay").hide();
       return;
    }
 
@@ -67,7 +68,7 @@ function displayButtonValue(button) {
    });
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, problemData[choiceSetCounter][index][counters[index]]);
+   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, randomElement);
 
    counters[index]++;
    if (counters[index] == 3) {
@@ -113,7 +114,8 @@ function doFancyStuff(value) {
 function makeFinalChoice(button) {
 
    // first we enable the overlay to darken the page
-   document.getElementById("overlay").className = 'overlay';
+   $("#overlay").fadeIn(300);
+   //document.getElementById("overlay").className = 'overlay';
    // we could do the same thing using jquery
    // $("#overlay").addClass("overlay");
    
@@ -145,6 +147,10 @@ function recordFinalChoice(choice, value) {
    // update their overall score
    // overallScore += parseFloat(value).toFixed(1);
    alert("You chose " + choice + " which returned a value of " + value);
+   
+   // show the estimate phase (the sliders), hide explore phase
+   $(".explore").toggle();
+   $(".estimate").toggle();
 
 
    // TODO
@@ -171,7 +177,7 @@ function initiateSliders() {
 			step: 1,
 			slide: function( event, ui ) {
             // siblings refers to the span element paired with each slider
-            $(this).siblings().text(ui.value);
+            $(this).siblings(".value").text(ui.value);
 
             var total = 0;
             // sums up the total value of each slider that is not the current slider
@@ -247,7 +253,19 @@ function submitSliderChoice(button) {
 
    sliderChoices.push(sliderVals);
 
+   // reset the sliders to r
+   $(".ui-slider").slider("value", 0);
+   $(".sliderScore").html("0%").css('color', 'red');
+
+
+
    populateOutcomeValuesInSlider();
+
+   // hide estimate sliders, show explore phase buttons for next problem
+   $(".explore").toggle();
+   $(".estimate").toggle();
+
+
 
 }   
 

@@ -22,7 +22,7 @@
          <p class="expInfo" id="problem"> Problem: <span class="number"> 1 </span> </p>
          <p class="expInfo"   id="trial"> Trial:   <span class="number"> 1 </span> </p>
 
-         <div id="choiceButtons">
+         <div id="choiceButtons" class='explore exploit'>
 
          <table>
          <tbody>
@@ -80,7 +80,10 @@
 
 
          <button type='submit' class='myButton' id='finalAnswer' name="Make final choice" onclick='makeFinalChoice(this)'>Make final choice</button>
-         <table>
+
+         </div> <!-- end of explore/exploit phase -->
+         <div class='estimate' hidden>
+         <table style="width: 100%;">
          <tbody>
          <tr>
 
@@ -116,7 +119,7 @@
                   }
                   echo "</ul>";
                   echo "<p>
-                        <span class='sliderScore' id='sliderScore_$j'>0</span>
+                        <span class='sliderScore' id='sliderScore_$j' style='color:red'>0%</span>
                         </p>";
          
                   echo "</td>";
@@ -130,7 +133,8 @@
          <button type='submit' class='myButton' id='sliderFinalAnswer' name="Make final choice" onclick='submitSliderChoice(this)'>Submit slider choice</button>
       </div>
 
-      <div id="overlay"></div>
+      <div id="overlay" class='overlay' style='display: none;'></div>
+
 
    </body>
 </html>
