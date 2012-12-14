@@ -149,7 +149,6 @@ function recordFinalChoice(choice, value) {
    //alert("You chose " + choice + " which returned a value of " + value);
    
    // show the estimate phase (the sliders), hide explore phase
-   $(".explore").toggle();
    $(".estimate").toggle();
 
 
@@ -270,7 +269,6 @@ function submitSliderChoice(button) {
    populateOutcomeValuesInSlider();
 
    // hide estimate sliders, show explore phase buttons for next problem
-   $(".explore").toggle();
    $(".estimate").toggle();
 
 
