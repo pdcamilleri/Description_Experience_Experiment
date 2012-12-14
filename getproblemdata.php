@@ -2,7 +2,13 @@
 
 // if you want to change this from 100 to something else,
 // just change it here, the rest of this code should still work
-define("NUM_OUTCOMES_PER_ALTERNATIVE", 3);
+define("NUM_OUTCOMES_PER_ALTERNATIVE", 100);
+
+// number of options/alternatives on each line in the csv file
+define("NUM_OPTIONS", 3);
+
+# the description column + the 10 probability + outcome columns
+define("OTHER_CRAP", 11);
 
 //header('Content-Type: application/json');
 // this is an array variable. it will hold arrays itself. this makes it a 2d array.
@@ -36,9 +42,15 @@ if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
       // deleting the element from the end, the last element, is called "popping"
       // and finally, adding on an element at the end is called "pushing"
       array_shift($data);
+      $smallArray = array();
+
       // so now the array contains only numbers, just what we want.
       // so lets adds this to the end of our big array using push
-      array_push($bigArray, array_chunk($data, NUM_OUTCOMES_PER_ALTERNATIVE));
+      for ($i = 0; $i < NUM_OPTIONS; $i++) {
+         //array_push($bigArray, array_chunk($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i) NUM_OUTCOMES_PER_ALTERNATIVE);
+         array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
+      }
+      array_push($bigArray, $smallArray);
    }
    // close the file
    fclose($file);
