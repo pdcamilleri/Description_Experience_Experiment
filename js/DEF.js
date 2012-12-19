@@ -196,7 +196,7 @@ function initiateSliders() {
             // show the value to the user
 
             // first get the score associated with this series of sliders
-            var sliderScore = $(this).parent().parent().parent().find(".sliderScore");
+            var sliderScore = $(this).parent().parent().parent().parent().find(".sliderScore");
             sliderScore.html(total + '%');
 
             // update the color if the sliders total to 100%

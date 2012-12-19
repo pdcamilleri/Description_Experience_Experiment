@@ -24,7 +24,7 @@
 
          <div id="choiceButtons" class='explore exploit'>
 
-         <table>
+         <table style='width: 100%;'>
          <tbody>
          <tr>
 
@@ -111,8 +111,10 @@
                   $max = 5;
                   for ($i = 0; $i < $max; $i++) {
                      echo "<li>
-                              <span class='outcomeValues'> ? </span>
-                              <div class='ui-slider'> </div>
+                              <div class='ui-widget' style='background-color:#f9f9f9;padding:15px 40px 10px 0px;'>
+                                 <span class='outcomeValues'> ? </span>
+                                 <div class='ui-slider' style='float:right;width:80%;'> </div>
+                              </div>
                            </li>";
                      //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";
                   }

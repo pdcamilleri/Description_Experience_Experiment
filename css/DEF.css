@@ -10,7 +10,7 @@ should clean it up
         }
     #container {
         text-align : center;
-    	width : 600px;
+    	width : 80%;
     	margin : auto;
     	background : #ffffff;
     	border-style : solid;
@@ -156,6 +156,6 @@ li {
 /* styling for the moving handle bit of the slider */
 .ui-slider-handle {
    text-decoration: none;
-   width: 45px;
+   /*width: 30px; */
    text-align: center;
 }
