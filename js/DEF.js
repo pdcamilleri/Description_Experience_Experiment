@@ -1,5 +1,7 @@
-// 2 second timeout
-var TIMEOUT_LENGTH = 2;
+var TIMEOUT_LENGTH = 2; // in seconds
+var NUM_OF_CHOICE_PARADIGMS = 3;
+var NUM_OF_FEEDBACK_TYPES = 3;
+
 // 3d array. will use it to store the 3d array created by getproblemdata.php
 var problemData = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
@@ -10,6 +12,10 @@ var finalChoices = [];
 var sliderChoices = [];
 var trialNumber = 1;
 var problemNumber = 1;
+
+// stuff being recorded in the output datafile
+var choiceParadigm = Math.ceil(Math.random() * NUM_OF_CHOICE_PARADIGMS);
+var feedbackType = Math.ceil(Math.random() * NUM_OF_FEEDBACK_TYPES);
 
 // execute this function when the window loads
 window.onload = function start() {
@@ -311,6 +317,13 @@ function unique(arr) {
       }
    }
    return result;
+}
+
+
+function sendDataToServer() {
+
+   $.post("posting.php", { name: "John", time: "2pm" } );
+
 }
    
 /*
