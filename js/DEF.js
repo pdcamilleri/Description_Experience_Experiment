@@ -102,7 +102,7 @@ function doFancyStuff(value) {
    });
 
    // reset all the scores
-   $(".score").html("???");
+   $(".score").html("");
 
    // update the score
    // a little hacky since the score is considered to be text and not numerical

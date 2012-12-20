@@ -57,8 +57,8 @@
             for ($i = 0; $i < $numOptions; $i++) {
                echo "<td>";
                echo "
-                  <p>
-                     <span class='score' id='buttonScore_$i'>???</span>
+                  <p style='min-height: 50px;'>
+                     <span class='score' id='buttonScore_$i'></span>
                   </p>
                ";
                echo "</td>";
