@@ -86,12 +86,12 @@ function displayButtonValue(button) {
 
 function setTrialNumber(value) {
    // fix this to use the actual var trialNumber
-   $("#trial > .number").html(value);
+   $("#trialNumber > .number").html(value);
 }
 
 function getTrialNumber() {
    //return trialNumber;
-   return parseInt($("#trial > .number").html());
+   return parseInt($("#trialNumber > .number").html());
 }
 
 // visually update the counter
@@ -128,9 +128,6 @@ function makeFinalChoice(button) {
    // need to toggle the javascript called by the buttons to now record a final answer
    makingFinalChoice = true;
 
-   // TODO check when exactly to update this variable
-   // update problem number
-   setProblemNumber(getProblemNumber() + 1);
 }
 
 function setProblemNumber(value) {
@@ -139,12 +136,20 @@ function setProblemNumber(value) {
    // then have someother method take this information and update the entire page
    // should do this for more things
    // and have them all in an update()
-   $("#problem > .number").html(value);
+   $("#problemNumber > .number").html(value);
 }
 
 function getProblemNumber() {
    //return problemNumber;
-   return parseInt($("#problem > .number").html());
+   return parseInt($("#problemNumber > .number").html());
+}
+
+function setTrialNumber(value) {
+   $("#trialNumber > .number").html(value);
+}
+
+function getTrialNumber() {
+   return parseInt($("#trialNumber > .number").html());
 }
 
 function recordFinalChoice(choice, value) {
@@ -276,6 +281,10 @@ function submitSliderChoice(button) {
 
    // hide estimate sliders, show explore phase buttons for next problem
    $(".estimate").toggle();
+
+   // update problem and trial number
+   setProblemNumber(getProblemNumber() + 1);
+   setTrialNumber(1);
 
 
 

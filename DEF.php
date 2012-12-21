@@ -19,8 +19,8 @@
          Decision-making Game
          </p>
 
-         <p class="expInfo" id="problem"> Problem: <span class="number"> 1 </span> </p>
-         <p class="expInfo"   id="trial"> Trial:   <span class="number"> 1 </span> </p>
+         <p class="expInfo" id="problemNumber"> Problem: <span class="number"> 1 </span> </p>
+         <p class="expInfo"   id="trialNumber"> Trial:   <span class="number"> 1 </span> </p>
 
          <div id="choiceButtons" class='explore exploit'>
 
