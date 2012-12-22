@@ -33,6 +33,7 @@ window.onload = function start() {
    }
    initiateSliders();
    cleanVariables();
+   disableMakeFinalChoice();
    
 };
 
@@ -95,6 +96,9 @@ function displayButtonValue(button) {
    }
 
    setTrialNumber(getTrialNumber() + 1);
+
+   // this is disabled until they make their first sample
+   enableMakeFinalChoice();
    
    choices.push(index);
    outcomes.push(randomElement);
@@ -144,6 +148,9 @@ function makeFinalChoice(button) {
    
    // need to toggle the javascript called by the buttons to now record a final answer
    makingFinalChoice = true;
+
+   // disable the button until we begin the next problem
+   disableMakeFinalChoice();
 
 }
 
@@ -278,6 +285,18 @@ function enableSliderSubmit() {
    document.getElementById("sliderFinalAnswer").style.color = '';
 }
 
+function disableMakeFinalChoice() {
+   document.getElementById("finalAnswer").disabled = true;
+   document.getElementById("finalAnswer").style.color = 'grey';
+}
+
+function enableMakeFinalChoice() {
+   document.getElementById("finalAnswer").disabled = false;
+   document.getElementById("finalAnswer").style.color = '';
+}
+
+
+
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
    var sliderVals = [];
@@ -301,13 +320,11 @@ function submitSliderChoice(button) {
 
    // send data to the server
    sendDataToServer();
-   cleanVariables();
 
-   // update problem and trial number
+   // set everything up for the next problem
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
-
-
+   cleanVariables();
 
 }   
 
