@@ -13,6 +13,12 @@ var sliderChoices = [];
 var trialNumber = 1;
 var problemNumber = 1;
 
+// will contain which button the participant chooses
+var choices = new Array();
+// will contain the outcome from that particular button
+var outcomes = new Array();
+// TODO 1-1 relatonship between the above two, can put into 2d array
+
 // stuff being recorded in the output datafile
 var choiceParadigm = Math.ceil(Math.random() * NUM_OF_CHOICE_PARADIGMS);
 var feedbackType = Math.ceil(Math.random() * NUM_OF_FEEDBACK_TYPES);
@@ -26,8 +32,15 @@ window.onload = function start() {
       counters[i] = 0;
    }
    initiateSliders();
+   cleanVariables();
    
 };
+
+function cleanVariables() {
+   trialNumber = 1;
+   choices = new Array();
+   outcomes = new Array();
+}
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {
@@ -44,7 +57,7 @@ $(document).ready(function() {
 
       });
 
-// displays the next result in the button
+// displays the next outcome, called when a button is pressed
 function displayButtonValue(button) {
    // first we get the index of this button into our various arrays
    var index = button.getAttribute("index");
@@ -82,6 +95,10 @@ function displayButtonValue(button) {
    }
 
    setTrialNumber(getTrialNumber() + 1);
+   
+   choices.push(index);
+   outcomes.push(randomElement);
+
 }
 
 function setTrialNumber(value) {
@@ -282,6 +299,10 @@ function submitSliderChoice(button) {
    // hide estimate sliders, show explore phase buttons for next problem
    $(".estimate").toggle();
 
+   // send data to the server
+   sendDataToServer();
+   cleanVariables();
+
    // update problem and trial number
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
@@ -331,7 +352,10 @@ function unique(arr) {
 
 function sendDataToServer() {
 
-   $.post("posting.php", { name: "John", time: "2pm" } );
+   $.post("posting.php", { 
+         'choices[]': choices, 
+         'outcomes[]': outcomes 
+   } );
 
 }
    

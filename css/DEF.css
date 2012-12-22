@@ -159,3 +159,15 @@ li {
    /*width: 30px; */
    text-align: center;
 }
+
+#trialNumber {
+   float: right;
+}
+
+#problemNumber {
+   float: left;
+}
+
+.expInfo {
+   font-size: 20px;
+}

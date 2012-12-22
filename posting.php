@@ -7,8 +7,15 @@ $filename = date("Y-m-d.H:i:s") . ".txt";
 
 //  DIRECTORY_SEPARATOR will be / or \ depending on OS (linux/mac vs Windows)
 $fp = fopen(DATA_DIR . DIRECTORY_SEPARATOR . $filename, 'a') or die("cant open file");
-fwrite($fp, $_POST['name']);
-fwrite($fp, $_POST['time']);
+
+$choices = $_POST['choices'];
+$outcomes = $_POST['outcomes'];
+
+
+fwrite($fp, $choices[0]);
+fwrite($fp, $outcomes[0]);
+fwrite($fp, 'hello world length of array is next');
+fwrite($fp, count($choices));
 fclose($fp);
 
 
