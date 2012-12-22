@@ -23,6 +23,14 @@ var outcomes = new Array();
 var choiceParadigm = Math.ceil(Math.random() * NUM_OF_CHOICE_PARADIGMS);
 var feedbackType = Math.ceil(Math.random() * NUM_OF_FEEDBACK_TYPES);
 
+
+// used when animating the outcomes
+var centerX = 0;
+var centerY = 0;
+var startX = 0;
+var startY = 0;
+
+
 // execute this function when the window loads
 window.onload = function start() {
 
@@ -34,6 +42,15 @@ window.onload = function start() {
    initiateSliders();
    cleanVariables();
    disableMakeFinalChoice();
+
+   var $this = $("#currentScore");
+   var offset = $this.offset();
+   var width = $this.width();
+   var height = $this.height();
+
+   centerX = offset.left + width / 2;
+   centerY = (offset.top + height / 2) - 30; 
+   /* minus 30 so that the text appears above the current score, not on top of it */
    
 };
 
@@ -60,6 +77,9 @@ $(document).ready(function() {
 
 // displays the next outcome, called when a button is pressed
 function displayButtonValue(button) {
+
+   var $this = $("#buttonScore_" + button.getAttribute('index'));
+
    // first we get the index of this button into our various arrays
    var index = button.getAttribute("index");
    // TODO make this a function so AC can easily change to an iterative version
@@ -88,7 +108,7 @@ function displayButtonValue(button) {
    });
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, randomElement);
+   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, randomElement, $this);
 
    counters[index]++;
    if (counters[index] == 3) {
@@ -103,6 +123,11 @@ function displayButtonValue(button) {
    choices.push(index);
    outcomes.push(randomElement);
 
+
+   startX = $this.position().left;
+   startY = $this.position().top;
+   $this.animate({'left': centerX - startX, 'top': centerY - startY}, 1000);
+
 }
 
 function setTrialNumber(value) {
@@ -116,7 +141,8 @@ function getTrialNumber() {
 }
 
 // visually update the counter
-function doFancyStuff(value) {
+function doFancyStuff(value, $outcome) {
+
    // enable buttons
    $(".myButton").each(function() {
          $(this).attr("disabled", false);
@@ -130,11 +156,8 @@ function doFancyStuff(value) {
    var currentScore = document.getElementById("currentScore");
    currentScore.innerHTML = (parseFloat(currentScore.innerHTML) + parseFloat(value)).toFixed(1);
 
-   // visually updates the total score
-   // TODO
-   // using jquery.animate() and parametric version of line between two points
-   // (x, y) = A + (B-A)t
-   // perhaps we only want 0.2 < t < 0.8 so no text overlaps
+   // move the button back to its original position
+   $outcome.animate({'left': 0, 'top': 0}, 1);
 
 }
 

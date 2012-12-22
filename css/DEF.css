@@ -171,3 +171,7 @@ li {
 .expInfo {
    font-size: 20px;
 }
+
+.score {
+position: relative;
+}
