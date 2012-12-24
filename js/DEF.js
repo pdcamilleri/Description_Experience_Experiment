@@ -1,4 +1,12 @@
-var TIMEOUT_LENGTH = 2; // in seconds
+//var TIMEOUT_LENGTH = 2; // in seconds
+// Timeout lengths in seconds
+// how long the outcome remains in its original position before the animation 
+var PRE_MOVE_TIMEOUT_LENGTH = 1;
+// during, how long the animation takes
+var PER_MOVE_TIMEOUT_LENGTH = 1;
+// after, how long to leave the outcome next to the animation
+var POST_MOVE_TIMEOUT_LENGTH = 1;
+
 var NUM_OF_CHOICE_PARADIGMS = 3;
 var NUM_OF_FEEDBACK_TYPES = 3;
 
@@ -108,7 +116,7 @@ function displayButtonValue(button) {
    });
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(doFancyStuff, TIMEOUT_LENGTH * 1000, randomElement, $this);
+   setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 1000, randomElement, $this);
 
    counters[index]++;
    if (counters[index] == 3) {
@@ -122,12 +130,6 @@ function displayButtonValue(button) {
    
    choices.push(index);
    outcomes.push(randomElement);
-
-
-   startX = $this.position().left;
-   startY = $this.position().top;
-   $this.animate({'left': centerX - startX, 'top': centerY - startY}, 1000);
-
 }
 
 function setTrialNumber(value) {
@@ -141,22 +143,35 @@ function getTrialNumber() {
 }
 
 // visually update the counter
-function doFancyStuff(value, $outcome) {
+function moveOutcomeToTotalScore(value, $outcome) {
+
+   // animate the outcome moving to the total score
+   startX = $outcome.position().left;
+   startY = $outcome.position().top;
+   $outcome.animate({'left': centerX - startX, 'top': centerY - startY}, PER_MOVE_TIMEOUT_LENGTH * 1000);
+
+   // PER + POST since animate() is non blocking
+   setTimeout(postAnimateCleanup, (PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH) * 1000, value, $outcome);
+
+}
+
+function postAnimateCleanup(value, $outcome) {
 
    // enable buttons
    $(".myButton").each(function() {
          $(this).attr("disabled", false);
    });
 
-   // reset all the scores
-   $(".score").html("");
-
    // update the score
    // a little hacky since the score is considered to be text and not numerical
    var currentScore = document.getElementById("currentScore");
    currentScore.innerHTML = (parseFloat(currentScore.innerHTML) + parseFloat(value)).toFixed(1);
 
+   // reset all the scores
+   $(".score").html("");
+
    // move the button back to its original position
+   // the button contains no text (due to the above line), so this animation is not visible to the user
    $outcome.animate({'left': 0, 'top': 0}, 1);
 
 }
