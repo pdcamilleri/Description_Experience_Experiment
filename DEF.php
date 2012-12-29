@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head>
@@ -15,6 +14,10 @@
    </head>
    <body>
       <div id="container">
+         <p class="emphasize">
+            The Balls Game
+         </p>
+
          <p id="overallInstructions">
             These are the overall instructions. Press some buttons.
          </p>
@@ -22,7 +25,7 @@
          <p id="finalChoiceInstructions">
             These are the make final choice instructions. Pick the button that you think is best.
          </p>
-
+         
          <p class="expInfo" id="problemNumber"> Problem: <span class="number"> 1 </span> </p>
          <p class="expInfo"   id="trialNumber"> Trial:   <span class="number"> 1 </span> </p>
 
