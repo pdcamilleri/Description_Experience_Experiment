@@ -266,7 +266,7 @@ function initiateSliders() {
             var total = 0;
             // sums up the total value of each slider that is not the current slider
             // (probably/definately a better way to do this)
-            $(this).parent().parent().find(".ui-slider").not(this).each(function() {
+            $(this).parent().parent().parent().find(".ui-slider").not(this).each(function() {
                total += $(this).slider("option", "value");
             });
 
