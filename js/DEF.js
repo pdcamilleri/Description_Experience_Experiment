@@ -106,6 +106,9 @@ function displayButtonValue(button) {
       $("#overlay").hide();
       $("#finalChoiceInstructions").css("color", "black");
 
+      // disable the choice buttons while the user does the sliders part of the problem
+      disableChoiceButtons();
+
       // this wasnt a real sample, so exit from the function
       return;
    }
@@ -342,6 +345,19 @@ function enableMakeFinalChoice() {
 }
 
 
+function enableChoiceButtons() {
+   $(".choiceButton").removeAttr('disabled')
+                     .css('color', '');
+}
+
+
+function disableChoiceButtons() {
+   $(".choiceButton").attr('disabled','disabled')
+                     .css('color', 'grey')
+}
+
+
+
 
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
@@ -366,6 +382,7 @@ function submitSliderChoice(button) {
    sendDataToServer();
 
    // set everything up for the next problem
+   enableChoiceButtons();
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
    cleanVariables();
