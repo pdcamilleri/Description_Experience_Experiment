@@ -15,8 +15,12 @@
    </head>
    <body>
       <div id="container">
-         <p class="emphasize">
-         Decision-making Game
+         <p id="overallInstructions">
+            These are the overall instructions. Press some buttons.
+         </p>
+           
+         <p id="finalChoiceInstructions">
+            These are the make final choice instructions. Pick the button that you think is best.
          </p>
 
          <p class="expInfo" id="problemNumber"> Problem: <span class="number"> 1 </span> </p>
@@ -75,14 +79,15 @@
             <span id="currentScore">0</span>
          </p>
 
-
-
-
-
          <button type='submit' class='myButton' id='finalAnswer' name="Make final choice" onclick='makeFinalChoice(this)'>Make final choice</button>
 
          </div> <!-- end of explore/exploit phase -->
          <div class='estimate' hidden>
+
+         <p id="sliderInstructions">
+            <strong>Make the sliders add up to 100%.</strong>
+         </p>
+
          <table style="width: 100%;">
          <tbody>
          <tr>

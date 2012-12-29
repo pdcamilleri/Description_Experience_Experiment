@@ -10,6 +10,8 @@ var POST_MOVE_TIMEOUT_LENGTH = 1;
 var NUM_OF_CHOICE_PARADIGMS = 3;
 var NUM_OF_FEEDBACK_TYPES = 3;
 
+var FINAL_CHOICE_FADE_IN_LENGTH = 3;
+
 // 3d array. will use it to store the 3d array created by getproblemdata.php
 var problemData = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
@@ -94,12 +96,17 @@ function displayButtonValue(button) {
    // get a random element from the distribution
    var randomElement = problemData[choiceSetCounter][index][Math.floor(Math.random() * problemData[choiceSetCounter][index].length)];
 
+   // this only gets executed when we are making the final choice
    if (makingFinalChoice) {
+      // reset everything ready for the next problem
       makingFinalChoice = false;
       recordFinalChoice(button.name, randomElement);
-      // get rid of the overlay, brighten up the page
-      //document.getElementById("overlay").className = '';
+
+      // get rid of the overlay, revert the instruction text back to black
       $("#overlay").hide();
+      $("#finalChoiceInstructions").css("color", "black");
+
+      // this wasnt a real sample, so exit from the function
       return;
    }
 
@@ -179,10 +186,11 @@ function postAnimateCleanup(value, $outcome) {
 function makeFinalChoice(button) {
 
    // first we enable the overlay to darken the page
-   $("#overlay").fadeIn(300);
-   //document.getElementById("overlay").className = 'overlay';
-   // we could do the same thing using jquery
-   // $("#overlay").addClass("overlay");
+   $("#overlay").fadeIn(FINAL_CHOICE_FADE_IN_LENGTH * 1000);
+
+   // highlight the instruction text by making it white on the dark overlay backdrop
+   //$("#finalChoiceInstructions").css("color", "white");
+   $("#finalChoiceInstructions").animate({"color": "white"}, FINAL_CHOICE_FADE_IN_LENGTH * 1000);
    
    // need to toggle the javascript called by the buttons to now record a final answer
    makingFinalChoice = true;
@@ -344,12 +352,10 @@ function submitSliderChoice(button) {
 
    sliderChoices.push(sliderVals);
 
-   // reset the sliders to r
+   // reset the sliders
    $(".ui-slider").slider("value", 0);
    $(".sliderScore").html("0%").css('color', 'red');
    $(".ui-slider-handle").text("0");
-
-
 
    populateOutcomeValuesInSlider();
 

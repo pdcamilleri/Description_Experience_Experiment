@@ -175,3 +175,9 @@ li {
 .score {
 position: relative;
 }
+
+#finalChoiceInstructions {
+   z-index: 1002;
+position: relative;
+}
+
