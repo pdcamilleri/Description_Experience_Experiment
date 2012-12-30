@@ -119,9 +119,9 @@
                   $max = 5;
                   for ($i = 0; $i < $max; $i++) {
                      echo "<li>
-                              <div class='ui-widget' style='background-color:#f9f9f9;padding:15px 40px 10px 0px;'>
+                              <div class='ui-widget slider-box' >
                                  <span class='outcomeValues'> ? </span>
-                                 <div class='ui-slider' style='float:right;width:80%;'> </div>
+                                 <div class='ui-slider'> </div>
                               </div>
                            </li>";
                      //echo "<div id='slider_$i' class='slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all'> </div>";

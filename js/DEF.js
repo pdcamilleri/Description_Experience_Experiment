@@ -68,7 +68,46 @@ function cleanVariables() {
    trialNumber = 1;
    choices = new Array();
    outcomes = new Array();
+
+   setSliderColors();
 }
+
+Array.prototype.shuffle = function () {
+   for (var i = this.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = this[i];
+      this[i] = this[j];
+      this[j] = tmp;
+   }
+
+   return this;
+}
+
+// creates three random light colors using the same r, g, b values
+// and assigns these colors to the sliders
+function setSliderColors() {
+
+   // the base elements to produce the colors from
+   letters = "89ABCDE".split('');
+   var r = "FF",
+       g = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)],
+       b = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)]
+   ;
+
+   // make an array of 3 colors, each composed of the same rgb values, just rotated along
+   colors = ["#" + r + g + r, "#" + g + b + r, "#" + b + r + g];
+   colors.shuffle();
+
+   // change the slider and associated button to these colors
+   $(".sliders").each(function(index) { 
+         $(this).find(".slider-box").css("background-color", colors[index]); 
+         $("#button_" + index).css("background", "-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #EDEDED), color-stop(1," + colors[index] + ") )")
+                              .css("background", "-moz-linear-gradient( center top, #EDEDED 5%, " + colors[index] + " 100% )");
+
+   });
+}
+
+   
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
 $(document).ready(function() {

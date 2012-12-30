@@ -181,3 +181,12 @@ position: relative;
 position: relative;
 }
 
+.slider-box {
+    background-color:#f9f9f9;
+    padding:15px 40px 10px 0px;
+}
+
+.ui-slider {
+   float:right;
+   width:80%;
+}
