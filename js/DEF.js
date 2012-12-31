@@ -29,6 +29,10 @@ var choices = new Array();
 var outcomes = new Array();
 // TODO 1-1 relatonship between the above two, can put into 2d array
 
+// bigger array to hold all choices and outcomes, which will be sent to the server at the end of the experiment
+var allOutcomes = new Array();
+var allChoices = new Array();
+
 // stuff being recorded in the output datafile
 var choiceParadigm = Math.ceil(Math.random() * NUM_OF_CHOICE_PARADIGMS);
 var feedbackType = Math.ceil(Math.random() * NUM_OF_FEEDBACK_TYPES);
@@ -177,8 +181,8 @@ function displayButtonValue(button) {
    // this is disabled until they make their first sample
    enableMakeFinalChoice();
    
-   choices.push(index);
-   outcomes.push(randomElement);
+   choices.push(parseInt(index));
+   outcomes.push(parseFloat(randomElement));
 }
 
 function setTrialNumber(value) {
@@ -395,9 +399,6 @@ function disableChoiceButtons() {
                      .css('color', 'grey')
 }
 
-
-
-
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
    var sliderVals = [];
@@ -412,15 +413,19 @@ function submitSliderChoice(button) {
    $(".sliderScore").html("0%").css('color', 'red');
    $(".ui-slider-handle").text("0");
 
-   populateOutcomeValuesInSlider();
-
    // hide estimate sliders, show explore phase buttons for next problem
    $(".estimate").toggle();
 
-   // send data to the server
-   sendDataToServer();
+   // save choice and outcome data
+   recordData();
+
+   if (choiceSetCounter == problemData.length) {
+      endExperiment();
+      return;
+   }
 
    // set everything up for the next problem
+   populateOutcomeValuesInSlider();
    enableChoiceButtons();
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
@@ -466,12 +471,22 @@ function unique(arr) {
    return result;
 }
 
+function recordData() {
+   allChoices.push(choices);
+   allOutcomes.push(outcomes);
+}
+
+function endExperiment() {
+   alert("The end");
+   sendDataToServer();
+}
 
 function sendDataToServer() {
 
    $.post("posting.php", { 
-         'choices[]': choices, 
-         'outcomes[]': outcomes 
+         'allChoices': JSON.stringify(allChoices), 
+         'allOutcomes': JSON.stringify(allOutcomes),
+         'allSliderChoices': JSON.stringify(sliderChoices)
    } );
 
 }
