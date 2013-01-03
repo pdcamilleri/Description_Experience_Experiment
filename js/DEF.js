@@ -158,15 +158,8 @@ function displayButtonValue(button) {
 
    $("#buttonScore_" + button.getAttribute('index')).html(randomElement);
 
-   // disabled all the buttons. this is using jquery. its the same as if i were to 
-   // do something like document.getElementByClassName("myButton")[0].disabled = true;
-   // this $(".myButton") syntax is just a quicker way of accessing multiple elements using jquery.
-   // here, the . in ".myButton"  means search all classes. if i wanted to get an element by id, i would use #.
-   // this works the same as it does in css
-   $(".myButton").each(function() {
-         // $(this) refers to the current object which will be a button
-         $(this).attr("disabled", true);
-   });
+   disableChoiceButtonsSilently();
+   disableMakeFinalChoiceSilent();
 
    // we have disabled the buttons, now cause a timeout
    setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 1000, randomElement, $this);
@@ -178,9 +171,6 @@ function displayButtonValue(button) {
 
    setTrialNumber(getTrialNumber() + 1);
 
-   // this is disabled until they make their first sample
-   enableMakeFinalChoice();
-   
    choices.push(parseInt(index));
    outcomes.push(parseFloat(randomElement));
 }
@@ -211,9 +201,8 @@ function moveOutcomeToTotalScore(value, $outcome) {
 function postAnimateCleanup(value, $outcome) {
 
    // enable buttons
-   $(".myButton").each(function() {
-         $(this).attr("disabled", false);
-   });
+   enableChoiceButtons();
+   enableMakeFinalChoice();
 
    // update the score
    // a little hacky since the score is considered to be text and not numerical
@@ -237,7 +226,11 @@ function makeFinalChoice(button) {
    // highlight the instruction text by making it white on the dark overlay backdrop
    //$("#finalChoiceInstructions").css("color", "white");
    $("#finalChoiceInstructions").animate({"color": "white"}, FINAL_CHOICE_FADE_IN_LENGTH * 1000);
-   
+
+   disableChoiceButtonsSilently();
+
+   setTimeout(enableChoiceButtons, (PRE_MOVE_TIMEOUT_LENGTH + PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH * 2) * 1000);
+
    // need to toggle the javascript called by the buttons to now record a final answer
    makingFinalChoice = true;
 
@@ -387,6 +380,12 @@ function enableMakeFinalChoice() {
    document.getElementById("finalAnswer").style.color = '';
 }
 
+// disables the final choice button without showing the user this has occurred
+function disableMakeFinalChoiceSilent() {
+   document.getElementById("finalAnswer").disabled = true;
+//   document.getElementById("finalAnswer").style.color = 'red';
+}
+
 
 function enableChoiceButtons() {
    $(".choiceButton").removeAttr('disabled')
@@ -396,7 +395,12 @@ function enableChoiceButtons() {
 
 function disableChoiceButtons() {
    $(".choiceButton").attr('disabled','disabled')
-                     .css('color', 'grey')
+                     .css('color', 'grey');
+}
+
+function disableChoiceButtonsSilently() {
+   $(".choiceButton").attr('disabled','disabled');
+                     //.css('color', 'red');
 }
 
 // saves the current value of all the sliders in the main slider array
