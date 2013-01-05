@@ -92,14 +92,14 @@ Array.prototype.shuffle = function () {
 function setSliderColors() {
 
    // the base elements to produce the colors from
-   letters = "89ABCDE".split('');
+   letters = "9ABCDE".split('');
    var r = "FF",
        g = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)],
        b = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)]
    ;
 
    // make an array of 3 colors, each composed of the same rgb values, just rotated along
-   colors = ["#" + r + g + r, "#" + g + b + r, "#" + b + r + g];
+   colors = ["#" + r + g + b, "#" + g + b + r, "#" + b + r + g];
    colors.shuffle();
 
    // change the slider and associated button to these colors
