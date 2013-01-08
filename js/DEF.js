@@ -1,3 +1,11 @@
+var ProbabilityEstimateTypeEnum = {
+     NONE  : {value: 0, name: "none",  code: "n"}, 
+     ALL   : {value: 1, name: "all",   code: "a"}, 
+     FINAL : {value: 2, name: "final", code: "f"}
+};
+
+var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
+
 //var TIMEOUT_LENGTH = 2; // in seconds
 // Timeout lengths in seconds
 // how long the outcome remains in its original position before the animation 
@@ -153,6 +161,7 @@ function displayButtonValue(button) {
       disableChoiceButtons();
 
       // this wasnt a real sample, so exit from the function
+      moveToNextPhase();
       return;
    }
 
@@ -267,10 +276,20 @@ function recordFinalChoice(choice, value) {
    // update their overall score
    // overallScore += parseFloat(value).toFixed(1);
    //alert("You chose " + choice + " which returned a value of " + value);
-   
-   // show the estimate phase (the sliders), hide explore phase
-   $(".estimate").toggle();
+}
 
+function moveToNextPhase() {
+   
+   if (probabilityEstimateType == ProbabilityEstimateTypeEnum.NONE) {
+      startNextProblem();
+      // no slider portion, move direction to the next problem
+      // TODO increment some phase thing here
+   } else if (probabilityEstimateType == ProbabilityEstimateTypeEnum.FINAL) {
+      // TODO check if we are at the final stage yet, if we are, show the slider
+   } else if (probabilityEstimateType == ProbabilityEstimateTypeEnum.ALL) {
+      // show the estimate phase (the sliders)
+      $(".estimate").toggle();
+   }
 
    // TODO
    // probably put a load new problem thing in here
@@ -278,7 +297,6 @@ function recordFinalChoice(choice, value) {
    if (choiceSetCounter == 3) {
       choiceSetCounter = 0;
    }
-
 
    return;
 }
@@ -428,13 +446,17 @@ function submitSliderChoice(button) {
       return;
    }
 
+   startNextProblem();
+}
+
+function startNextProblem() {
+
    // set everything up for the next problem
    populateOutcomeValuesInSlider();
    enableChoiceButtons();
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
    cleanVariables();
-
 }   
 
 // TODO
@@ -495,6 +517,11 @@ function sendDataToServer() {
 
 }
    
+function setProbabilityEstimate(type) {
+   probabilityEstimateType = ProbabilityEstimateTypeEnum[type];
+}
+
+
 /*
     //Note the details of the game
     var totalProblems = 16;
