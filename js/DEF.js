@@ -285,7 +285,11 @@ function moveToNextPhase() {
       // no slider portion, move direction to the next problem
       // TODO increment some phase thing here
    } else if (probabilityEstimateType == ProbabilityEstimateTypeEnum.FINAL) {
-      // TODO check if we are at the final stage yet, if we are, show the slider
+      if (choiceSetCounter + 1 == problemData.length) {
+         $(".estimate").toggle();
+      } else {
+         startNextProblem();
+      }
    } else if (probabilityEstimateType == ProbabilityEstimateTypeEnum.ALL) {
       // show the estimate phase (the sliders)
       $(".estimate").toggle();
@@ -294,9 +298,9 @@ function moveToNextPhase() {
    // TODO
    // probably put a load new problem thing in here
    choiceSetCounter++;
-   if (choiceSetCounter == 3) {
-      choiceSetCounter = 0;
-   }
+   //if (choiceSetCounter == 3) {
+   //   choiceSetCounter = 0;
+   //}
 
    return;
 }
