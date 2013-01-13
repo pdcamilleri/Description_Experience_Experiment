@@ -1,10 +1,26 @@
+// defining the different conditions that are possible
 var ProbabilityEstimateTypeEnum = {
      NONE  : {value: 0, name: "none",  code: "n"}, 
      ALL   : {value: 1, name: "all",   code: "a"}, 
      FINAL : {value: 2, name: "final", code: "f"}
 };
 
+var ChoiceParadigmEnum = {
+     DESCRIPTION : {value: 0, name: "description", code: "d"}, 
+     SAMPLING    : {value: 1, name: "sampling",    code: "s"}, 
+     FEEDBACK    : {value: 2, name: "feedback",    code: "f"}
+};
+
+var FeedbackTypeEnum = {
+     NONE     : {value: 0, name: "none",     code: "n"}, 
+     PARTIAL  : {value: 1, name: "partial",  code: "p"}, 
+     COMPLETE : {value: 2, name: "complete", code: "c"}
+};
+
+// these variables will hold the value of each condition that is being used in the current experiment
 var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
+var choiceParadigmType = ChoiceParadigmEnum.DESCRIPTION;
+var feedbackType = FeedbackTypeEnum.COMPLETE;
 
 //var TIMEOUT_LENGTH = 2; // in seconds
 // Timeout lengths in seconds
