@@ -57,11 +57,6 @@ var outcomes = new Array();
 var allOutcomes = new Array();
 var allChoices = new Array();
 
-// stuff being recorded in the output datafile
-var choiceParadigm = Math.ceil(Math.random() * NUM_OF_CHOICE_PARADIGMS);
-var feedbackType = Math.ceil(Math.random() * NUM_OF_FEEDBACK_TYPES);
-
-
 // used when animating the outcomes
 var centerX = 0;
 var centerY = 0;
@@ -155,19 +150,32 @@ $(document).ready(function() {
 // displays the next outcome, called when a button is pressed
 function displayButtonValue(button) {
 
+   // display an outcome value for each button
+   $(".choiceButton").each(function() {
+         // not sure why I cant do $(this).getAttribute("index")
+         var $this = $(this);
+         var index = $this.attr("index");
+
+         // get a random element for this particular button
+         var randomElement = problemData[choiceSetCounter][index][Math.floor(Math.random() * problemData[choiceSetCounter][index].length)];
+
+         // display the random element, but hide it first (we will display it later based on the FeedbackType
+         $("#buttonScore_" + index).hide()
+                                   .html(randomElement);
+
+   });
+
+   // get the particular button the user clicked
    var $this = $("#buttonScore_" + button.getAttribute('index'));
 
-   // first we get the index of this button into our various arrays
-   var index = button.getAttribute("index");
-   // TODO make this a function so AC can easily change to an iterative version
-   // get a random element from the distribution
-   var randomElement = problemData[choiceSetCounter][index][Math.floor(Math.random() * problemData[choiceSetCounter][index].length)];
+   // TODO make the act of getting a value from the distributions a function so AC can easily change to an iterative version
 
    // this only gets executed when we are making the final choice
    if (makingFinalChoice) {
       // reset everything ready for the next problem
       makingFinalChoice = false;
-      recordFinalChoice(button.name, randomElement);
+
+      recordFinalChoice(button.name, parseInt($this.html()));
 
       // get rid of the overlay, revert the instruction text back to black
       $("#overlay").hide();
@@ -181,13 +189,22 @@ function displayButtonValue(button) {
       return;
    }
 
-   $("#buttonScore_" + button.getAttribute('index')).html(randomElement);
+   // depending on the feedbackType, display the various outcomes to the user
+   if (feedbackType == FeedbackTypeEnum.NONE) {
+      // do nothing, no feedback
+   } else if (feedbackType == FeedbackTypeEnum.PARTIAL) {
+      // only show the current score
+      $this.show();
+   } else if (feedbackType == FeedbackTypeEnum.COMPLETE) {
+      // show all scores
+      $(".score").show()
+   }
 
    disableChoiceButtonsSilently();
    disableMakeFinalChoiceSilent();
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 1000, randomElement, $this);
+   setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 1000, $this.html(), $this);
 
    counters[index]++;
    if (counters[index] == 3) {
