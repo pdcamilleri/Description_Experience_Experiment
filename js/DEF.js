@@ -63,7 +63,6 @@ var centerY = 0;
 var startX = 0;
 var startY = 0;
 
-
 // execute this function when the window loads
 window.onload = function start() {
 
@@ -75,6 +74,7 @@ window.onload = function start() {
    initiateSliders();
    cleanVariables();
    disableMakeFinalChoice();
+   createChoiceButtonText();
 
    var $this = $("#currentScore");
    var offset = $this.offset();
@@ -130,6 +130,28 @@ function setSliderColors() {
    });
 }
 
+// used when generating the "Choice A" that appears on each choice button
+var nextLetter = 0;
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function getNextLetter() {
+   var ret = alphabet[nextLetter];
+   nextLetter++;
+   // just cycle around, ...XYZABC...
+   if (nextLetter == alphabet.length) {
+      nextLetter = 0;
+   }
+   return ret;
+}
+
+// writes "Choice A" in the choice buttons
+function createChoiceButtonText() {
+
+   $(".choiceButton").each(function() {
+      $(this).text("Choice " + getNextLetter());
+   });
+
+}
    
 
 // when the page has loaded, go and grab the problem data, stick it in our problemData variable
@@ -206,6 +228,8 @@ function displayButtonValue(button) {
    // we have disabled the buttons, now cause a timeout
    setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 1000, $this.html(), $this);
 
+   // get the index of this button into our various arrays
+   var index = button.getAttribute("index");
    counters[index]++;
    if (counters[index] == 3) {
       counters[index] = 0;
@@ -214,7 +238,7 @@ function displayButtonValue(button) {
    setTrialNumber(getTrialNumber() + 1);
 
    choices.push(parseInt(index));
-   outcomes.push(parseFloat(randomElement));
+   outcomes.push(parseFloat($("#buttonScore_" + index).html()));
 }
 
 function setTrialNumber(value) {
@@ -494,6 +518,7 @@ function startNextProblem() {
    setProblemNumber(getProblemNumber() + 1);
    setTrialNumber(1);
    cleanVariables();
+   createChoiceButtonText();
 }   
 
 // TODO

@@ -7,8 +7,12 @@
       <meta http-equiv="Pragma" content="no-cache" />
       <title>Decision-making Game</title>
       <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.css" />
+      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery-ui.min.js"></script>
+      <!--
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+      -->
       <link rel="stylesheet" type="text/css" href="css/DEF.css" />
       <script type="text/javascript" src="js/DEF.js"></script>
    </head>
@@ -50,7 +54,7 @@
             for ($i = 0; $i < $numOptions; $i++) {
                echo "<td>";
                echo "<div>";
-               echo "<button type='submit' class='myButton choiceButton' id='button_$i' index='$i' name='Choice $char' onclick='displayButtonValue(this)'>Choice $char</button>";
+               echo "<button type='submit' class='myButton choiceButton' id='button_$i' index='$i' name='Choice $char' onclick='displayButtonValue(this)'>nothing</button>";
                // note the id is button_$num, where $num is a variable..
                // because this string is enclosed withing doublequotes "",
                // $num will be replaced by the value of the variable $num, which is called variable interpolation
