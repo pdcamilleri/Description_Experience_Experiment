@@ -31,10 +31,10 @@ var PER_MOVE_TIMEOUT_LENGTH = 1;
 // after, how long to leave the outcome next to the animation
 var POST_MOVE_TIMEOUT_LENGTH = 1;
 
-var NUM_OF_CHOICE_PARADIGMS = 3;
-var NUM_OF_FEEDBACK_TYPES = 3;
+var NUM_OF_CHOICE_PARADIGMS = 1;
+var NUM_OF_FEEDBACK_TYPES = 1;
 
-var FINAL_CHOICE_FADE_IN_LENGTH = 3;
+var FINAL_CHOICE_FADE_IN_LENGTH = 1;
 
 // 3d array. will use it to store the 3d array created by getproblemdata.php
 var problemData = new Array();
@@ -336,8 +336,15 @@ function recordFinalChoice(choice, value) {
 }
 
 function moveToNextPhase() {
-   
+  
    if (probabilityEstimateType == ProbabilityEstimateTypeEnum.NONE) {
+      // check if we are at the end of the experiment
+      // this is the exit point for the None probability type only
+      if (choiceSetCounter + 1 == problemData.length) {
+         endExperiment();
+         return;
+      }
+ 
       startNextProblem();
       // no slider portion, move direction to the next problem
       // TODO increment some phase thing here
@@ -502,6 +509,8 @@ function submitSliderChoice(button) {
    // save choice and outcome data
    recordData();
 
+   // check if we are at the end of the experiment
+   // this is the exit point for the Final and All Probability Types
    if (choiceSetCounter == problemData.length) {
       endExperiment();
       return;
