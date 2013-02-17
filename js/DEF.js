@@ -592,6 +592,10 @@ function setProbabilityEstimate(type) {
    probabilityEstimateType = ProbabilityEstimateTypeEnum[type];
 }
 
+function setFeedback(type) {
+   feedbackType = FeedbackTypeEnum[type];
+}
+
 
 /*
     //Note the details of the game

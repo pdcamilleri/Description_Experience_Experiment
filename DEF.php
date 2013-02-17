@@ -22,6 +22,13 @@
          <button class="myButton" onclick='setProbabilityEstimate("NONE")'>None</button>
          <button class="myButton" onclick='setProbabilityEstimate("FINAL")'>Final</button>
          <button class="myButton" onclick='setProbabilityEstimate("ALL")'>All</button>
+
+         <p> Feedback Type</p>
+         <button class="myButton" onclick='setFeedback("NONE")'>None</button>
+         <button class="myButton" onclick='setFeedback("PARTIAL")'>Partial</button>
+         <button class="myButton" onclick='setFeedback("COMPLETE")'>Complete</button>
+ 
+
          <p class="emphasize">
             The Balls Game
          </p>
