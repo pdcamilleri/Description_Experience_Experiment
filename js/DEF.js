@@ -84,6 +84,11 @@ window.onload = function start() {
    centerX = offset.left + width / 2;
    centerY = (offset.top + height / 2) - 30; 
    /* minus 30 so that the text appears above the current score, not on top of it */
+
+   // hide the total score
+   if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
+      $("#currentScore").hide();
+   }
    
 };
 
@@ -598,6 +603,12 @@ function setFeedback(type) {
 
 function setChoiceParadigm(type) {
    choiceParadigmType = ChoiceParadigmEnum[type];
+   if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
+      $("#currentScore").hide();
+   } else {
+      $("#currentScore").show();
+   }
+   
 }
 
 
