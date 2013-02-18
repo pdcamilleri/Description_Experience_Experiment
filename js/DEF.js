@@ -596,6 +596,10 @@ function setFeedback(type) {
    feedbackType = FeedbackTypeEnum[type];
 }
 
+function setChoiceParadigm(type) {
+   choiceParadigmType = ChoiceParadigmEnum[type];
+}
+
 
 /*
     //Note the details of the game
