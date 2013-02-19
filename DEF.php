@@ -7,12 +7,12 @@
       <meta http-equiv="Pragma" content="no-cache" />
       <title>Decision-making Game</title>
       <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.css" />
+      <!--
       <script src="js/jquery.min.js"></script>
       <script src="js/jquery-ui.min.js"></script>
-      <!--
+      -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-      -->
       <link rel="stylesheet" type="text/css" href="css/DEF.css" />
       <script type="text/javascript" src="js/DEF.js"></script>
    </head>
