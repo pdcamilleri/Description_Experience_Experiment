@@ -48,7 +48,14 @@ if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
       // so lets adds this to the end of our big array using push
       for ($i = 0; $i < NUM_OPTIONS; $i++) {
          //array_push($bigArray, array_chunk($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i) NUM_OUTCOMES_PER_ALTERNATIVE);
-         array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
+
+         // here we send across the problem data as a big array. the first value of the array is the description, eg 80% chance of 4, else 0
+         $thing = array_merge(
+               array_slice($data, (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, 1), 
+               array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE)
+         );
+         array_push($smallArray, $thing);
+         //array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
       }
       array_push($bigArray, $smallArray);
    }

@@ -37,7 +37,10 @@ var NUM_OF_FEEDBACK_TYPES = 1;
 var FINAL_CHOICE_FADE_IN_LENGTH = 1;
 
 // 3d array. will use it to store the 3d array created by getproblemdata.php
+// this will contain the results of all buttons, eg 4, 4, 4, 0, 4, 0, 4, 4, ...
 var problemData = new Array();
+// this will contain the descriptions for each problem, eg "80% chance of 4, else 0"
+var problemDescriptions = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
 var counters = [];
 var choiceSetCounter = 0; // indicates which choice set we are up to (in other words, which line in the csv file)
@@ -74,7 +77,6 @@ window.onload = function start() {
    initiateSliders();
    cleanVariables();
    disableMakeFinalChoice();
-   createChoiceButtonText();
 
    var $this = $("#currentScore");
    var offset = $this.offset();
@@ -152,9 +154,15 @@ function getNextLetter() {
 // writes "Choice A" in the choice buttons
 function createChoiceButtonText() {
 
-   $(".choiceButton").each(function() {
-      $(this).text("Choice " + getNextLetter());
-   });
+   if (choiceParadigmType == ChoiceParadigmEnum.DESCRIPTION) {
+      $(".choiceButton").each(function(index) {
+         $(this).text(problemDescriptions[choiceSetCounter][index]);
+      });
+   } else {
+      $(".choiceButton").each(function() {
+         $(this).text("Choice " + getNextLetter());
+      });
+   }
 
 }
    
@@ -164,9 +172,19 @@ $(document).ready(function() {
       $.get("getproblemdata.php", function(data, status) {
             problemData = data;
 
+            for (var i = 0; i < problemData.length; i++) { 
+               problemDescriptions[i] = new Array();
+               for (var j = 0; j < problemData[i].length; j++) { 
+                  // we remove the description from the problemData array
+                  // and put it in its own array
+                  problemDescriptions[i].push(problemData[i][j].shift());
+               }  
+            }
+
             // TODO
             // find better place to put this
             populateOutcomeValuesInSlider();
+            createChoiceButtonText();
    
          }, 
          'json' 
@@ -341,11 +359,18 @@ function recordFinalChoice(choice, value) {
 }
 
 function moveToNextPhase() {
-  
+ 
+   // TODO
+   // probably put a load new problem thing in here
+   choiceSetCounter++;
+   //if (choiceSetCounter == 3) {
+   //   choiceSetCounter = 0;
+   //}
+ 
    if (probabilityEstimateType == ProbabilityEstimateTypeEnum.NONE) {
       // check if we are at the end of the experiment
       // this is the exit point for the None probability type only
-      if (choiceSetCounter + 1 == problemData.length) {
+      if (choiceSetCounter == problemData.length) {
          endExperiment();
          return;
       }
@@ -354,7 +379,7 @@ function moveToNextPhase() {
       // no slider portion, move direction to the next problem
       // TODO increment some phase thing here
    } else if (probabilityEstimateType == ProbabilityEstimateTypeEnum.FINAL) {
-      if (choiceSetCounter + 1 == problemData.length) {
+      if (choiceSetCounter == problemData.length) {
          $(".estimate").toggle();
       } else {
          startNextProblem();
@@ -363,13 +388,6 @@ function moveToNextPhase() {
       // show the estimate phase (the sliders)
       $(".estimate").toggle();
    }
-
-   // TODO
-   // probably put a load new problem thing in here
-   choiceSetCounter++;
-   //if (choiceSetCounter == 3) {
-   //   choiceSetCounter = 0;
-   //}
 
    return;
 }
