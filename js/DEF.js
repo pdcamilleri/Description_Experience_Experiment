@@ -19,7 +19,7 @@ var FeedbackTypeEnum = {
 
 // these variables will hold the value of each condition that is being used in the current experiment
 var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
-var choiceParadigmType = ChoiceParadigmEnum.DESCRIPTION;
+var choiceParadigmType = ChoiceParadigmEnum.FEEDBACK;
 var feedbackType = FeedbackTypeEnum.COMPLETE;
 
 //var TIMEOUT_LENGTH = 2; // in seconds
@@ -90,8 +90,10 @@ window.onload = function start() {
    // hide the total score
    if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
       $("#currentScore").hide();
+   } else if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK) {
+      $("#finalAnswer").hide()
    }
-   
+
 };
 
 function cleanVariables() {
@@ -256,6 +258,14 @@ function displayButtonValue(button) {
    counters[index]++;
    if (counters[index] == 3) {
       counters[index] = 0;
+   }
+
+   if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 5) {
+      // TODO
+      // move to next problem
+      alert("you have sampled 5 times, moving on to the next phase now");
+      disableChoiceButtons();
+      moveToNextPhase();
    }
 
    setTrialNumber(getTrialNumber() + 1);
