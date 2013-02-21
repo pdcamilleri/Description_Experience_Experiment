@@ -18,24 +18,6 @@
    </head>
    <body>
       <div id="container">
-         <p> Probability Estimate Type 
-            <button class="paramaterButton" onclick='setProbabilityEstimate("NONE")'>None</button>
-            <button class="paramaterButton" onclick='setProbabilityEstimate("FINAL")'>Final</button>
-            <button class="paramaterButton" onclick='setProbabilityEstimate("ALL")'>All</button>
-         </p>
-
-         <p> Feedback Type
-            <button class="paramaterButton" onclick='setFeedback("NONE")'>None</button>
-            <button class="paramaterButton" onclick='setFeedback("PARTIAL")'>Partial</button>
-            <button class="paramaterButton" onclick='setFeedback("COMPLETE")'>Complete</button>
-         </p>
-
-         <p> Choice Paradigm
-            <button class="paramaterButton" onclick='setChoiceParadigm("DESCRIPTION")'>Description</button>
-            <button class="paramaterButton" onclick='setChoiceParadigm("FEEDBACK")'>Feedback</button>
-            <button class="paramaterButton" onclick='setChoiceParadigm("SAMPLING")'>Sampling</button>
-         </p>
-
          <p class="emphasize">
             The Balls Game
          </p>
