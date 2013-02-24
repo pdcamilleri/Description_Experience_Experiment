@@ -18,9 +18,16 @@ var FeedbackTypeEnum = {
 };
 
 // these variables will hold the value of each condition that is being used in the current experiment
-var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
-var choiceParadigmType = ChoiceParadigmEnum.FEEDBACK;
-var feedbackType = FeedbackTypeEnum.COMPLETE;
+//var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
+var probabilityEstimateType = (function() {
+      if (Math.random() < 0.5) { 
+         return ProbabilityEstimateTypeEnum.FINAL;
+      } else { 
+         return ProbabilityEstimateTypeEnum.ALL;
+      }
+})();
+var choiceParadigmType = ChoiceParadigmEnum.SAMPLING;
+var feedbackType = FeedbackTypeEnum.PARTIAL;
 
 //var TIMEOUT_LENGTH = 2; // in seconds
 // Timeout lengths in seconds
@@ -34,7 +41,7 @@ var POST_MOVE_TIMEOUT_LENGTH = 1;
 var NUM_OF_CHOICE_PARADIGMS = 1;
 var NUM_OF_FEEDBACK_TYPES = 1;
 
-var FINAL_CHOICE_FADE_IN_LENGTH = 1;
+var FINAL_CHOICE_FADE_IN_LENGTH = 3;
 
 // 3d array. will use it to store the 3d array created by getproblemdata.php
 // this will contain the results of all buttons, eg 4, 4, 4, 0, 4, 0, 4, 4, ...
@@ -260,7 +267,7 @@ function displayButtonValue(button) {
       counters[index] = 0;
    }
 
-   if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 5) {
+   if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
       // TODO
       // move to next problem
       alert("you have sampled 5 times, moving on to the next phase now");
