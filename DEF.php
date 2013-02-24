@@ -42,7 +42,7 @@
 
             <?php
 
-            $numOptions = 3;
+            $numOptions = 2;
 
             // we generate the buttons using PHP because we want the number of buttons to be able to change. 2, 3, or more...
             $char = 'A';

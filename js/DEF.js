@@ -576,7 +576,7 @@ function startNextProblem() {
 function populateOutcomeValuesInSlider() {
 
    // all the values are in problemData[choiceSetCounter][0/1/2][0..end]
-   var length = problemData[choiceSetCounter].length;
+   var length = problemData[choiceSetCounter].length - 1;
    for (var i = 0; i < length; i++) {
 
       // unhide all the sliders, in case some were hidden for the previous problem 
