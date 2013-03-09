@@ -24,11 +24,24 @@ $bigArray = array();
 // so really its $bigArray[choice set][alternative][outcome]
 // its complicated, but by storing everything in this way, it will easily work if you add more choice sets, or a 4th alternative, or whatever.
 
+// create an array with all of the folders we are picking from, so you can easily add more folders in future
+$folders = array("k2", "k3", "k4"); 
+// choose a random element from the above array
+$chosenFolder = $folders[array_rand($folders)];
+
+// gets a number between 1 and 200 inclusive
+$minFileNumber = 1;
+$maxFileNumber = 3;
+$chosenFile = rand($minFileNumber, $maxFileNumber);
+
+// put it all together to pick a single file
+$choiceSetFile = "choiceSets/${chosenFolder}/${chosenFolder}-${chosenFile}.csv";
 
 $row = 1;
 // open the file "outcomes.csv" for reading (the "r"), we will access the file using the $file variable
 // if the file is not present, fopen will return FALSE, and so the loop will not execute
-if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
+//if (($file = fopen("outcomes.csv", "r")) !== FALSE) {
+if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
    // this reads in the first line of the file and discards it, because we dont need it.
    fgetcsv($file, 0, ",");
    // read the file in line by line using the fgetcsv function
