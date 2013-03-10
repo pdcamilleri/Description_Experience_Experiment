@@ -27,7 +27,7 @@ function seenHomepage() {
 <!-- HTML-->
 <body>
   <div id="container">
-    <form id="DemographicsForm" name="DemographicsForm" method="post" action="DE.php" onsubmit="return checkAnswers()">
+    <form id="DemographicsForm" name="DemographicsForm" method="post" action="DEF.php" onsubmit="return checkAnswers()">
       <p class="emphasize">Demographics</p>
 
       <p>Please fill in your demographic details below.</p>
