@@ -31,7 +31,7 @@ $chosenFolder = $folders[array_rand($folders)];
 
 // gets a number between 1 and 200 inclusive
 $minFileNumber = 1;
-$maxFileNumber = 3;
+$maxFileNumber = 200;
 $chosenFile = rand($minFileNumber, $maxFileNumber);
 
 // put it all together to pick a single file
