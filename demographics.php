@@ -26,7 +26,14 @@ function seenHomepage() {
 
 <!-- HTML-->
 <body>
-  <div id="container">
+   
+  <div id="someText">
+    this is some text
+    </br>
+    <button onclick="document.getElementById('container').hidden = ''; document.getElementById('someText').hidden = true; "> Button text </button>
+  </div>
+
+  <div id="container" hidden>
     <form id="DemographicsForm" name="DemographicsForm" method="post" action="DEF.php" onsubmit="return checkAnswers()">
       <p class="emphasize">Demographics</p>
 
