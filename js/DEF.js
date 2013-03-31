@@ -46,6 +46,16 @@ var FINAL_CHOICE_FADE_IN_LENGTH = 3;
 // 3d array. will use it to store the 3d array created by getproblemdata.php
 // this will contain the results of all buttons, eg 4, 4, 4, 0, 4, 0, 4, 4, ...
 var problemData = new Array();
+// IMPORTANT NOTE, problem data contains meta information to randomise and unrandomise the problems
+// problemData = [ 
+//                  [0, [ all the values for ChoiceSet 1] ],
+//                  [1, [ all the values for ChoiceSet 2] ],
+//                  ..
+// The choice sets can then be shuffled to produce a random ordering for the participant, 
+// but can just as easily be unshuffled by sorting by that lone numbering element.
+// this allows us to easily randomise and unrandomise for each participant
+
+
 // this will contain the descriptions for each problem, eg "80% chance of 4, else 0"
 var problemDescriptions = new Array();
 // an array to hold a counter variable for each choice set, indicating where we are up to in each distribution.
@@ -183,10 +193,10 @@ $(document).ready(function() {
 
             for (var i = 0; i < problemData.length; i++) { 
                problemDescriptions[i] = new Array();
-               for (var j = 0; j < problemData[i].length; j++) { 
+               for (var j = 0; j < problemData[i][1].length; j++) { 
                   // we remove the description from the problemData array
                   // and put it in its own array
-                  problemDescriptions[i].push(problemData[i][j].shift());
+                  //problemDescriptions[i].push(problemData[i][j].shift());
                }  
             }
 
@@ -211,7 +221,8 @@ function displayButtonValue(button) {
          var index = $this.attr("index");
 
          // get a random element for this particular button
-         var randomElement = problemData[choiceSetCounter][index][Math.floor(Math.random() * problemData[choiceSetCounter][index].length)];
+         // the [1] in pD[CSC][1], is because of the randomising/unrandomising variable
+         var randomElement = problemData[choiceSetCounter][1][index][Math.floor(Math.random() * problemData[choiceSetCounter][1][index].length)];
 
          // display the random element, but hide it first (we will display it later based on the FeedbackType
          $("#buttonScore_" + index).hide()
@@ -576,14 +587,14 @@ function startNextProblem() {
 function populateOutcomeValuesInSlider() {
 
    // all the values are in problemData[choiceSetCounter][0/1/2][0..end]
-   var length = problemData[choiceSetCounter].length - 1;
+   var length = problemData[choiceSetCounter][1].length - 1;
    for (var i = 0; i < length; i++) {
 
       // unhide all the sliders, in case some were hidden for the previous problem 
       $("#sliders_" + i).children().show();
 
       // get the unique elements present in the outcomes array and assign these to the sliders
-      var uniqueArray = unique(problemData[choiceSetCounter][i]);
+      var uniqueArray = unique(problemData[choiceSetCounter][1][i]);
       var outcomeValues = $("#sliders_" + i).find(".outcomeValues"); 
       for (var j = 0; j < uniqueArray.length; j++) {
          outcomeValues[j].innerHTML = uniqueArray[j];

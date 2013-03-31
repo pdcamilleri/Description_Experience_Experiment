@@ -44,6 +44,9 @@ $row = 1;
 if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
    // this reads in the first line of the file and discards it, because we dont need it.
    fgetcsv($file, 0, ",");
+
+   $lineNumber = 0; // which line in the file we are on, used for randomising & unrandomising questions
+
    // read the file in line by line using the fgetcsv function
    // this basically gets a line from the file and stores it in $data
    // $data is an array created by cutting up the values in the csv file. it looks something like this
@@ -70,7 +73,9 @@ if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
          array_push($smallArray, $thing);
          //array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
       }
-      array_push($bigArray, $smallArray);
+      array_push($bigArray, array($lineNumber, $smallArray));
+      //array_push($bigArray, $smallArray);
+      $lineNumber++;
    }
    // close the file
    fclose($file);
