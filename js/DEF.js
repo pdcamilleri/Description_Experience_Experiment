@@ -200,6 +200,9 @@ $(document).ready(function() {
                }  
             }
 
+            // mix up the order in which the choice sets are presented to the participant
+            problemData.shuffle();
+
             // TODO
             // find better place to put this
             populateOutcomeValuesInSlider();
