@@ -55,6 +55,8 @@ var problemData = new Array();
 // but can just as easily be unshuffled by sorting by that lone numbering element.
 // this allows us to easily randomise and unrandomise for each participant
 
+var problemDataFile;
+
 
 // this will contain the descriptions for each problem, eg "80% chance of 4, else 0"
 var problemDescriptions = new Array();
@@ -190,6 +192,7 @@ function createChoiceButtonText() {
 $(document).ready(function() {
       $.get("getproblemdata.php", function(data, status) {
             problemData = data;
+            problemDataFile = problemData.pop();
 
             for (var i = 0; i < problemData.length; i++) { 
                problemDescriptions[i] = new Array();

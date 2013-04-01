@@ -87,6 +87,10 @@ if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
 // ask me and ill set you up
 //print_r($bigArray);
 
+
+// we want to know the file that we used to get the choice sets from
+array_push($bigArray, $choiceSetFile);
+
 // so we are done, just need to send this array back to the webpage
 echo json_encode($bigArray);
 //print_r($bigArray);
