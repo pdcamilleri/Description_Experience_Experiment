@@ -228,7 +228,7 @@ function displayButtonValue(button) {
 
          // get a random element for this particular button
          // the [1] in pD[CSC][1], is because of the randomising/unrandomising variable
-         var randomElement = problemData[choiceSetCounter][1][index][Math.floor(Math.random() * problemData[choiceSetCounter][1][index].length)];
+         var randomElement = problemData[choiceSetCounter][1][index][1][Math.floor(Math.random() * problemData[choiceSetCounter][1][index][1].length)];
 
          // display the random element, but hide it first (we will display it later based on the FeedbackType
          $("#buttonScore_" + index).hide()
@@ -600,7 +600,7 @@ function populateOutcomeValuesInSlider() {
       $("#sliders_" + i).children().show();
 
       // get the unique elements present in the outcomes array and assign these to the sliders
-      var uniqueArray = unique(problemData[choiceSetCounter][1][i]);
+      var uniqueArray = unique(problemData[choiceSetCounter][1][i][1]);
       var outcomeValues = $("#sliders_" + i).find(".outcomeValues"); 
       for (var j = 0; j < uniqueArray.length; j++) {
          outcomeValues[j].innerHTML = uniqueArray[j];

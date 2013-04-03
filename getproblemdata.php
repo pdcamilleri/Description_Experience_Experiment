@@ -70,7 +70,8 @@ if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
                array_slice($data, (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, 1), 
                array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE)
          );
-         array_push($smallArray, $thing);
+         // the $i is used to randomised/unrandomise the side that the button is on when presented to the participant
+         array_push($smallArray, array($i, $thing));
          //array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
       }
       array_push($bigArray, array($lineNumber, $smallArray));
