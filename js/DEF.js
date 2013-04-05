@@ -633,6 +633,12 @@ function recordData() {
 function endExperiment() {
    alert("The end");
    sendDataToServer();
+   showEndPage();
+}
+
+function showEndPage() {
+   $("#container").hide();
+   $(".container").show()
 }
 
 function sendDataToServer() {

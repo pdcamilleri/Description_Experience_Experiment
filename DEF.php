@@ -148,6 +148,12 @@
 
       <div id="overlay" class='overlay' style='display: none;'></div>
 
-
+      </div>
+      <div class="container" style="display: none;" > 
+        <p class="emphasize">The End</p>
+        <p>This is the end of the game! Thank you for your participation. To complete the HIT, please copy and paste the code below into the mTurk HIT page.</p>
+        <p id="uniqueCode"> </p>
+        <p>(Note: Please do not attempt to play this game again because your unique id has been recorded by our system and you will not recieve any credit or payment for playing again).</p>
+      </div>
    </body>
 </html>

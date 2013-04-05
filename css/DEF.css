@@ -8,7 +8,7 @@ should clean it up
     	background-color:#EEEEEE;
         text-align:center;
         }
-    #container {
+    #container, .container {
         text-align : center;
     	width : 80%;
     	margin : auto;
