@@ -646,7 +646,8 @@ function sendDataToServer() {
    $.post("posting.php", { 
          'allChoices': JSON.stringify(allChoices), 
          'allOutcomes': JSON.stringify(allOutcomes),
-         'allSliderChoices': JSON.stringify(sliderChoices)
+         'allSliderChoices': JSON.stringify(sliderChoices),
+         'problemDataFile': JSON.stringify(problemDataFile)
    } );
 
 }
