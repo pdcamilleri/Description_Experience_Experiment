@@ -206,6 +206,12 @@ $(document).ready(function() {
             // mix up the order in which the choice sets are presented to the participant
             problemData.shuffle();
 
+            // shuffle the side in which a problem appears on, (left or right);
+            // TODO this needs to changed if 3 problems are being presented to the user
+            for (var i = 0; i < problemData.length; i++) {
+               problemData[i][1].shuffle();
+            }
+
             // TODO
             // find better place to put this
             populateOutcomeValuesInSlider();
@@ -227,7 +233,7 @@ function displayButtonValue(button) {
          var index = $this.attr("index");
 
          // get a random element for this particular button
-         // the [1] in pD[CSC][1], is because of the randomising/unrandomising variable
+         // the [1] in problemData[CSC][1], is because of the randomising/unrandomising variable
          var randomElement = problemData[choiceSetCounter][1][index][1][Math.floor(Math.random() * problemData[choiceSetCounter][1][index][1].length)];
 
          // display the random element, but hide it first (we will display it later based on the FeedbackType
