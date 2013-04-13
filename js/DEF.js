@@ -196,10 +196,10 @@ $(document).ready(function() {
 
             for (var i = 0; i < problemData.length; i++) { 
                problemDescriptions[i] = new Array();
-               for (var j = 0; j < problemData[i][1].length; j++) { 
+               for (var j = 0; j < problemData[i][1][1].length; j++) { 
                   // we remove the description from the problemData array
                   // and put it in its own array
-                  //problemDescriptions[i].push(problemData[i][j].shift());
+                  problemDescriptions[i].push(problemData[i][1][j][1].shift());
                }  
             }
 
