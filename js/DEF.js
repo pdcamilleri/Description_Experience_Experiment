@@ -209,7 +209,14 @@ $(document).ready(function() {
             // shuffle the side in which a problem appears on, (left or right);
             // TODO this needs to changed if 3 problems are being presented to the user
             for (var i = 0; i < problemData.length; i++) {
-               problemData[i][1].shuffle();
+               if (Math.random() < 0.5) {
+                  var tempArray = problemData[i][1][0];
+                  problemData[i][1][0] = problemData[i][1][1];
+                  problemData[i][1][1] = tempArray;
+               }
+                  // TODO
+                  // uncomment the line below, and comment the lines above when there are 3 problems per choice set
+                  //problemData[i][1].shuffle();
             }
 
             // TODO
