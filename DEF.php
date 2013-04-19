@@ -119,7 +119,7 @@
                // print a series of sliders for each column
                for ($j = 0; $j < $numOptions; $j++) {
                   echo "<td>";
-                  echo "<ul class='sliders' id='sliders_$j'>";
+                  echo "<ul class='sliders' id='sliders_$j' index='$j'>";
                   $max = 5;
                   for ($i = 0; $i < $max; $i++) {
                      echo "<li>

@@ -70,9 +70,30 @@ var trialNumber = 1;
 var problemNumber = 1;
 
 // will contain which button the participant chooses
-var choices = new Array();
+var choices = new Array( 
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array()
+);
 // will contain the outcome from that particular button
-var outcomes = new Array();
+var outcomes = new Array( 
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array()
+);
+var sliderChoices = new Array( 
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array()
+);
+
+
 // TODO 1-1 relatonship between the above two, can put into 2d array
 
 // bigger array to hold all choices and outcomes, which will be sent to the server at the end of the experiment
@@ -117,8 +138,8 @@ window.onload = function start() {
 
 function cleanVariables() {
    trialNumber = 1;
-   choices = new Array();
-   outcomes = new Array();
+   //choices = new Array();
+   //outcomes = new Array();
 
    setSliderColors();
 }
@@ -307,8 +328,11 @@ function displayButtonValue(button) {
 
    setTrialNumber(getTrialNumber() + 1);
 
-   choices.push(parseInt(index));
-   outcomes.push(parseFloat($("#buttonScore_" + index).html()));
+   // problemDate[choiceSetCounter][0] is the choiceSet, one of {0, 1, 2, 3, 4}
+   // problemData[choiceSetCounter][1][parseInt(index)][0] is the outcomes, one of {0, 1, 2}, 0 for the first outcome in the csv file,
+   choices[problemData[choiceSetCounter][0]].push(problemData[choiceSetCounter][1][parseInt(index)][0]);
+   // 
+   outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
 }
 
 function setTrialNumber(value) {
@@ -561,12 +585,22 @@ function disableChoiceButtonsSilently() {
 
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
-   var sliderVals = [];
+   var sliderVals = new Array( 
+         new Array(),
+         new Array()
+   );
+   //outcomes[problemData[choiceSetCounter][1]]
    $(".sliders .ui-slider").each(function() {
-      sliderVals.push($(this).slider("option", "value"));
+      // add all of their slider choice values to an array
+      sliderVals[parseInt($(this).parent().parent().parent().attr("index"))].push($(this).slider("option", "value"));
+      //parseInt($(this).parent().parent().parent().attr("index")); // this is the index, either 0, 1, 2, like left, middle, right
    });
 
-   sliderChoices.push(sliderVals);
+   // add the array containing the slider choices for this particular problem to 
+   // a larger array that stores slider choices for all problems in the experiment
+
+   sliderChoices[problemData[choiceSetCounter - 1][0]] = sliderVals;
+   //sliderChoices.push(sliderVals);
 
    // reset the sliders
    $(".ui-slider").slider("value", 0);
@@ -655,12 +689,17 @@ function showEndPage() {
 }
 
 function sendDataToServer() {
+   demographics = "demo is null";
 
    $.post("posting.php", { 
-         'allChoices': JSON.stringify(allChoices), 
-         'allOutcomes': JSON.stringify(allOutcomes),
+         'allChoices': JSON.stringify(choices), 
+         'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),
-         'problemDataFile': JSON.stringify(problemDataFile)
+         'problemDataFile': JSON.stringify(problemDataFile),
+         'demographics': JSON.stringify(demographics),
+         'probabilityEstimateType': JSON.stringify(probabilityEstimateType.name),
+         'choiceParadigmType': JSON.stringify(choiceParadigmType.name),
+         'feedbackType': JSON.stringify(feedbackType.name)
    } );
 
 }

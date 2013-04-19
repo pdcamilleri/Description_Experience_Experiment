@@ -12,6 +12,21 @@ $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
 
+$problemDataFile = str_replace('\"','"',$_POST['problemDataFile']);
+$demographics = str_replace('\"','"',$_POST['demographics']);
+$probabilityEstimateType = str_replace('\"','"',$_POST['probabilityEstimateType']);
+$choiceParadigmType = str_replace('\"','"',$_POST['choiceParadigmType']);
+$feedbackType = str_replace('\"','"',$_POST['feedbackType']);
+
+
+
+
+fwrite($fp, "all $_POST\n");
+fwrite($fp, "problemDateFile $problemDataFile\n");
+fwrite($fp, "demographics $demographics\n");
+fwrite($fp, "prob est type $probabilityEstimateType\n");
+fwrite($fp, "choice type $choiceParadigmType\n");
+fwrite($fp, "feedback type $feedbackType\n");
 
 for ($i = 0; $i < count($allChoices); $i++) {
    fwrite($fp, "== $i ==\nchoices\n");
