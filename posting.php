@@ -53,14 +53,14 @@ for ($i = 0; $i < count($allChoices); $i++) {
       fwrite($fp, ',');
    
    }
-   fwrite($fp, "\nslider choices");
+   fwrite($fp, "\nslider choices,");
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
       for ($k = 0; $k < count($allSliderChoices[$i][$j]); $k++) {
          fwrite($fp, $allSliderChoices[$i][$j][$k]);
          fwrite($fp, ",");
       }
    }
-   fwrite($fp, "\nassociated slider outcomes");
+   fwrite($fp, "\nassociated slider outcomes,");
    for ($j = 0; $j < count($associatedOutcomes[$i]); $j++) {
       for ($k = 0; $k < count($associatedOutcomes[$i][$j]); $k++) {
          fwrite($fp, $associatedOutcomes[$i][$j][$k]);
