@@ -92,6 +92,14 @@ var sliderChoices = new Array(
       new Array(),
       new Array()
 );
+var associatedOutcomes = new Array( 
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array()
+);
+
 
 
 // TODO 1-1 relatonship between the above two, can put into 2d array
@@ -585,6 +593,13 @@ function disableChoiceButtonsSilently() {
 
 // saves the current value of all the sliders in the main slider array
 function submitSliderChoice(button) {
+
+   // the outcomes associated with each slider, eg 25.6 or something from the distribution
+   var sliderOutcomes = new Array( 
+         new Array(),
+         new Array()
+   );
+
    var sliderVals = new Array( 
          new Array(),
          new Array()
@@ -592,6 +607,7 @@ function submitSliderChoice(button) {
    //outcomes[problemData[choiceSetCounter][1]]
    $(".sliders .ui-slider").each(function() {
       // add all of their slider choice values to an array
+      sliderOutcomes[parseInt($(this).parent().parent().parent().attr("index"))].push(parseInt($(this).parent().children("span").html()));
       sliderVals[parseInt($(this).parent().parent().parent().attr("index"))].push($(this).slider("option", "value"));
       //parseInt($(this).parent().parent().parent().attr("index")); // this is the index, either 0, 1, 2, like left, middle, right
    });
@@ -600,6 +616,7 @@ function submitSliderChoice(button) {
    // a larger array that stores slider choices for all problems in the experiment
 
    sliderChoices[problemData[choiceSetCounter - 1][0]] = sliderVals;
+   associatedOutcomes[problemData[choiceSetCounter - 1][0]] = sliderOutcomes;
    //sliderChoices.push(sliderVals);
 
    // reset the sliders
@@ -689,14 +706,14 @@ function showEndPage() {
 }
 
 function sendDataToServer() {
-   demographics = "demo is null";
 
    $.post("posting.php", { 
          'allChoices': JSON.stringify(choices), 
          'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),
+         'associatedOutcomes': JSON.stringify(associatedOutcomes),
          'problemDataFile': JSON.stringify(problemDataFile),
-         'demographics': JSON.stringify(demographics),
+         'demographics': unescape(demographics),
          'probabilityEstimateType': JSON.stringify(probabilityEstimateType.name),
          'choiceParadigmType': JSON.stringify(choiceParadigmType.name),
          'feedbackType': JSON.stringify(feedbackType.name)

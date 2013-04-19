@@ -149,6 +149,27 @@
       <div id="overlay" class='overlay' style='display: none;'></div>
 
       </div>
+
+      <?php>
+      //Collect all the form data
+      $ip = $_SERVER["REMOTE_ADDR"];
+      $country = $_POST['Residence'];
+      $gender = $_POST['Gender'];
+      $age = $_POST['Age'];
+      $education = $_POST['Education'];
+      $employment = $_POST['Employment'];
+      $maritalStatus = $_POST['Marital'];
+      $income = $_POST['Income'];
+      $demographics = array($ip, $country, $gender, $age, $education, $employment, $maritalStatus, $income);
+      ?>
+      <script type="text/javascript">
+         var demographics = <?php 
+            //echo json_encode($demographics, JSON_HEX_QUOT);
+            //echo json_encode($demographics, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+            echo json_encode($demographics); 
+         ?>;
+      </script>
+
       <div class="container" style="display: none;" > 
         <p class="emphasize">The End</p>
         <p>This is the end of the game! Thank you for your participation. To complete the HIT, please copy and paste the code below into the mTurk HIT page.</p>
