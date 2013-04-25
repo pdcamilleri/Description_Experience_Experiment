@@ -1,16 +1,4 @@
-<?php
-//This code checks that the user came via the homepage, and redicts if not
-session_start();
-seenHomepage();
-function seenHomepage() {
-    if (!isset($_SESSION['homepage_visit']) || $_SESSION['homepage_visit'] != true) {
-        header("Location: http://www.adriancamilleri.net/Exp11a/");
-    } else {
-        return true;
-    }
-}
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
@@ -19,21 +7,10 @@ function seenHomepage() {
     <meta http-equiv="Pragma" content="no-cache" />
     <title>Decision-making Game</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-
-    <!-- javascript to check that all information is given on the demographics page -->
     <script type="text/javascript" src="js/demographics.js"></script>
 </head>
-
-<!-- HTML-->
 <body>
-   
-  <div id="someText">
-    this is some text
-    </br>
-    <button onclick="document.getElementById('container').hidden = ''; document.getElementById('someText').hidden = true; "> Button text </button>
-  </div>
-
-  <div id="container" hidden>
+  <div id="container">
     <form id="DemographicsForm" name="DemographicsForm" method="post" action="DEF.php" onsubmit="return checkAnswers()">
       <p class="emphasize">Demographics</p>
 
@@ -1081,7 +1058,7 @@ function seenHomepage() {
         </tr>
 
         <tr>
-          <td><label for="Gender">What is your gender?</label> 
+          <td><label for="Gender">Which of the following best describes your gender?</label> 
           </td>
         </tr>
         <tr>  
@@ -1090,18 +1067,18 @@ function seenHomepage() {
               
             </option>
             
-            <option value="1">
-              Male
+            <option value="0">
+              Woman
             </option>
 
-            <option value="2">
-              Female
+            <option value="1">
+              Man
             </option>
           </select></td>
         </tr>
 
         <tr>
-          <td><label for="Age">What is your age?</label> 
+          <td><label for="Age">Which of the following best describes your age?</label> 
           </td>
         </tr>
         <tr>  
@@ -1423,7 +1400,7 @@ function seenHomepage() {
             </option>
 
             <option value="2">
-              Trade or Vocational degree
+              Employed part time
             </option>
 
             <option value="3">
