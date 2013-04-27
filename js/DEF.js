@@ -614,23 +614,27 @@ function submitSliderChoice(button) {
    );
    //outcomes[problemData[choiceSetCounter][1]]
    $(".sliders .ui-slider").each(function() {
-      // add all of their slider choice values to an array
-      sliderOutcomes[parseInt($(this).parent().parent().parent().attr("index"))].push(parseInt($(this).parent().children("span").html()));
-      sliderVals[parseInt($(this).parent().parent().parent().attr("index"))].push($(this).slider("option", "value"));
-      //parseInt($(this).parent().parent().parent().attr("index")); // this is the index, either 0, 1, 2, like left, middle, right
+      // if the value of this slider is "-", then it means we should ignore it because it doesnt contain a useful value
+      if ($(this).parent().children("span").html() != "-") {
+         // add all of their slider choice values to an array
+         sliderOutcomes[parseInt($(this).parent().parent().parent().attr("index"))].push(parseInt($(this).parent().children("span").html()));
+         sliderVals[parseInt($(this).parent().parent().parent().attr("index"))].push($(this).slider("option", "value"));
+         //parseInt($(this).parent().parent().parent().attr("index")); // this is the index, either 0, 1, 2, like left, middle, right
+      }
    });
 
    // add the array containing the slider choices for this particular problem to 
    // a larger array that stores slider choices for all problems in the experiment
 
-   sliderChoices[problemData[choiceSetCounter - 1][0]] = sliderVals;
-   associatedOutcomes[problemData[choiceSetCounter - 1][0]] = sliderOutcomes;
+   sliderChoices[problemData[choiceSetCounter][0]] = sliderVals;
+   associatedOutcomes[problemData[choiceSetCounter][0]] = sliderOutcomes;
    //sliderChoices.push(sliderVals);
 
    // reset the sliders
    $(".ui-slider").slider("value", 0);
    $(".sliderScore").html("0%").css('color', 'red');
    $(".ui-slider-handle").text("0");
+   $(".slider-box span").html("-");
 
    // hide estimate sliders, show explore phase buttons for next problem
    $(".estimate").toggle();

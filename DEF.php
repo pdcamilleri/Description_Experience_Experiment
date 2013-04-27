@@ -144,7 +144,7 @@
 		                  for ($i = 0; $i < $max; $i++) {
 		                     echo "<li>
 		                              <div class='ui-widget slider-box' >
-		                                 <span class='outcomeValues'> ? </span>
+		                                 <span class='outcomeValues'>-</span>
 		                                 <div class='ui-slider'> </div>
 		                              </div>
 		                           </li>";
