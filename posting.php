@@ -34,7 +34,7 @@ fwrite($fp, "$feedbackType,\n");
 
 fwrite($fp, "\n");
 for ($i = 0; $i < count($allChoices); $i++) {
-   fwrite($fp, "choice set $i,");
+   fwrite($fp, "choice set " . ($i + 1) . ","); // $i + 1 so that the choice sets go from 1..5, and not from 0..4
    fwrite($fp, "\nchoices,");
    for ($j = 0; $j < 100; $j++) {
       if ($j < count($allChoices[$i])) {
