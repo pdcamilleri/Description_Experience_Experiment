@@ -25,16 +25,16 @@ $probabilityEstimateType = str_replace('\"','"',$_POST['probabilityEstimateType'
 $choiceParadigmType = str_replace('\"','"',$_POST['choiceParadigmType']);
 $feedbackType = str_replace('\"','"',$_POST['feedbackType']);
 
-fwrite($fp, "$id\n");
-fwrite($fp, "$demographics\n");
-fwrite($fp, "$problemDataFile\n");
-fwrite($fp, "$probabilityEstimateType\n");
-fwrite($fp, "$choiceParadigmType\n");
-fwrite($fp, "$feedbackType\n");
+fwrite($fp, "$id,\n");
+fwrite($fp, "$demographics,\n");
+fwrite($fp, "$problemDataFile,\n");
+fwrite($fp, "$probabilityEstimateType,\n");
+fwrite($fp, "$choiceParadigmType,\n");
+fwrite($fp, "$feedbackType,\n");
 
 fwrite($fp, "\n");
 for ($i = 0; $i < count($allChoices); $i++) {
-   fwrite($fp, "choice set $i");
+   fwrite($fp, "choice set $i,");
    fwrite($fp, "\nchoices,");
    for ($j = 0; $j < 100; $j++) {
       if ($j < count($allChoices[$i])) {
@@ -44,6 +44,8 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       fwrite($fp, ',');
    }
+
+   fwrite($fp, ',');
 
    fwrite($fp, "\noutcomes,");
    for ($j = 0; $j < 100; $j++) {
@@ -55,13 +57,19 @@ for ($i = 0; $i < count($allChoices); $i++) {
       fwrite($fp, ',');
    
    }
-   fwrite($fp, "\nslider choices,");
+
+   fwrite($fp, ',');
+
+   fwrite($fp, "\nslider choices");
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
       for ($k = 0; $k < count($allSliderChoices[$i][$j]); $k++) {
          fwrite($fp, $allSliderChoices[$i][$j][$k]);
          fwrite($fp, ",");
       }
    }
+   
+   fwrite($fp, ',');
+
    fwrite($fp, "\nassociated slider outcomes,");
    for ($j = 0; $j < count($associatedOutcomes[$i]); $j++) {
       for ($k = 0; $k < count($associatedOutcomes[$i][$j]); $k++) {
