@@ -28,9 +28,9 @@ $feedbackType = str_replace('\"','"',$_POST['feedbackType']);
 fwrite($fp, "$id,\n");
 fwrite($fp, "$demographics,\n");
 fwrite($fp, "$problemDataFile,\n");
-fwrite($fp, "$probabilityEstimateType,\n");
-fwrite($fp, "$choiceParadigmType,\n");
-fwrite($fp, "$feedbackType,\n");
+fwrite($fp, "estimate,$probabilityEstimateType,\n");
+fwrite($fp, "format,$choiceParadigmType,\n");
+fwrite($fp, "feedback type,$feedbackType,\n");
 
 fwrite($fp, "\n");
 for ($i = 0; $i < count($allChoices); $i++) {
