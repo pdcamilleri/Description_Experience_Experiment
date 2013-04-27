@@ -298,7 +298,7 @@ function displayButtonValue(button) {
 
       // get rid of the overlay, revert the instruction text back to black
       $("#overlay").hide();
-  	document.getElementById("finalChoiceInstructions").style.visibility="hidden";
+      document.getElementById("finalChoiceInstructions").style.visibility="hidden";
       $("#finalChoiceInstructions").css("color", "black");
 
       // disable the choice buttons while the user does the sliders part of the problem
@@ -345,8 +345,8 @@ function displayButtonValue(button) {
 
    // problemDate[choiceSetCounter][0] is the choiceSet, one of {0, 1, 2, 3, 4}
    // problemData[choiceSetCounter][1][parseInt(index)][0] is the outcomes, one of {0, 1, 2}, 0 for the first outcome in the csv file,
-   choices[problemData[choiceSetCounter][0]].push(problemData[choiceSetCounter][1][parseInt(index)][0]);
-   // 
+   // and we add 1 to get one of {1, 2, 3}
+   choices[problemData[choiceSetCounter][0]].push(problemData[choiceSetCounter][1][parseInt(index)][0] + 1);
    outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
 }
 
