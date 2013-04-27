@@ -9,6 +9,7 @@ $filename = date("Y-m-d.H:i:s") . ".txt";
 //  DIRECTORY_SEPARATOR will be / or \ depending on OS (linux/mac vs Windows)
 $fp = fopen(DATA_DIR.DIRECTORY_SEPARATOR.$filename, 'a') or die("cant open file");
 
+$id = $_POST['id'];
 $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
@@ -24,6 +25,7 @@ $probabilityEstimateType = str_replace('\"','"',$_POST['probabilityEstimateType'
 $choiceParadigmType = str_replace('\"','"',$_POST['choiceParadigmType']);
 $feedbackType = str_replace('\"','"',$_POST['feedbackType']);
 
+fwrite($fp, "$id\n");
 fwrite($fp, "$demographics\n");
 fwrite($fp, "$problemDataFile\n");
 fwrite($fp, "$probabilityEstimateType\n");
