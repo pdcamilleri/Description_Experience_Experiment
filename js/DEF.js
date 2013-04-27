@@ -272,9 +272,11 @@ function displayButtonValue(button) {
          var $this = $(this);
          var index = $this.attr("index");
 
-         // get a random element for this particular button
+         // get a random element for this particular button and remove it from the array of possible outcomes using the splice()
+         var desiredIndex = Math.floor(Math.random() * problemData[choiceSetCounter][1][index][1].length);
+         var randomElement = problemData[choiceSetCounter][1][index][1].splice(desiredIndex, 1)[0]; 
+         // the [0] at the end of this last line is because splice returns an array, but we want the first element of the array, hence the [0]
          // the [1] in problemData[CSC][1], is because of the randomising/unrandomising variable
-         var randomElement = problemData[choiceSetCounter][1][index][1][Math.floor(Math.random() * problemData[choiceSetCounter][1][index][1].length)];
 
          // display the random element, but hide it first (we will display it later based on the FeedbackType
          $("#buttonScore_" + index).hide()
@@ -714,7 +716,7 @@ function showEndPage() {
 function sendDataToServer() {
 
    $.post("posting.php", { 
-         'id' : createUUID();
+         'id' : createUUID(),
          'allChoices': JSON.stringify(choices), 
          'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),
