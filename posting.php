@@ -11,6 +11,7 @@ $fp = fopen(DATA_DIR.DIRECTORY_SEPARATOR.$filename, 'a') or die("cant open file"
 // get all of the paramaters that were posted from the DEF.js file.
 $id = $_POST['id'];
 $orderingOfProblems = json_decode($_POST['orderingOfProblems']);
+//$top = str_replace('\"','"',$_POST['theoreticalOutcomesAndProbabilities']);
 $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
@@ -22,6 +23,24 @@ $problemDataFile = str_replace('\"','"',$_POST['problemDataFile']);
 $probabilityEstimateType = str_replace('\"','"',$_POST['probabilityEstimateType']);
 $choiceParadigmType = str_replace('\"','"',$_POST['choiceParadigmType']);
 $feedbackType = str_replace('\"','"',$_POST['feedbackType']);
+
+
+$top = array();
+
+// just reopen the file and get the outcome + probability information again
+// this is all very similar to getproblemdata.php
+if (($file = fopen(substr($problemDataFile, 1, -1), "r")) !== FALSE) {
+   fgetcsv($file, 0, ",");
+   while (($data = fgetcsv($file, 0, ",")) !== FALSE) {
+      array_shift($data);
+      $smallOutcomesArray = array();
+      for ($z = 0; $z < 3; $z++) { // 3 == NUM_OPTIONS, see getproblemdata.php
+         array_push($smallOutcomesArray, array_slice($data, 1 + (11 + 100) * $z, 10));
+      }
+      array_push($top, $smallOutcomesArray);
+   }
+   fclose($file);
+}
 
 // start writing to the file
 
@@ -45,9 +64,26 @@ for ($i = 0; $i < count($allChoices); $i++) {
    }
 
    fwrite($fp, ",\n");
-
+   
+   
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
-      fwrite($fp, "option " . ($j + 1) . " probabilities,"); 
+
+      fwrite($fp, "option " . ($j + 1) . " outcomes,");
+      for ($k = 0; $k < count($top[$i][$j]); $k = $k + 2) {
+         fwrite($fp, $top[$i][$j][$k]);
+         fwrite($fp, ",");
+      }
+      fwrite($fp, "\n");
+    
+      fwrite($fp, "option " . ($j + 1) . " probabilities,");
+      for ($k = 1; $k < count($top[$i][$j]); $k = $k + 2) {
+         fwrite($fp, $top[$i][$j][$k]);
+         fwrite($fp, ",");
+      }
+      fwrite($fp, "\n");
+
+
+      fwrite($fp, "option " . ($j + 1) . " slider choices,"); 
       for ($k = 0; $k < count($allSliderChoices[$i][$j]); $k++) {
          fwrite($fp, $allSliderChoices[$i][$j][$k]);
          fwrite($fp, ",");
@@ -57,7 +93,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
          fwrite($fp, "-,");
       }
       fwrite($fp, "\n");
-      fwrite($fp, "option " . ($j + 1) . " outcomes,"); 
+      fwrite($fp, "option " . ($j + 1) . " slider outcomes,"); 
       for ($k = 0; $k < count($associatedOutcomes[$i][$j]); $k++) {
          fwrite($fp, $associatedOutcomes[$i][$j][$k]);
          fwrite($fp, ",");
@@ -94,6 +130,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
    fwrite($fp, "\n\n");
 
 }
+
 /*
 fwrite($fp, "choices\n--");
 $var = print_r($allChoices, true);
