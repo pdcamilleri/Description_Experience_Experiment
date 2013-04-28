@@ -10,6 +10,7 @@ $fp = fopen(DATA_DIR.DIRECTORY_SEPARATOR.$filename, 'a') or die("cant open file"
 
 // get all of the paramaters that were posted from the DEF.js file.
 $id = $_POST['id'];
+$orderingOfProblems = json_decode($_POST['orderingOfProblems']);
 $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
@@ -34,6 +35,15 @@ fwrite($fp, "feedback type,$feedbackType,\n");
 fwrite($fp, "\n");
 for ($i = 0; $i < count($allChoices); $i++) {
    fwrite($fp, "choice set " . ($i + 1)); // $i + 1 so that the choice sets go from 1..5, and not from 0..4
+   fwrite($fp, ",\n");
+   fwrite($fp, "choice order,");
+   for ($j = 0; $j < count($orderingOfProblems); $j++) {
+      if ($orderingOfProblems[$j] == $i) {
+         fwrite($fp, $j + 1);
+         break;
+      }
+   }
+
    fwrite($fp, ",\n");
 
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {

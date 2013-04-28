@@ -56,6 +56,7 @@ var problemData = new Array();
 // this allows us to easily randomise and unrandomise for each participant
 
 var problemDataFile;
+var orderingOfProblems = [];
 
 
 // this will contain the descriptions for each problem, eg "80% chance of 4, else 0"
@@ -239,6 +240,11 @@ $(document).ready(function() {
             // mix up the order in which the choice sets are presented to the participant
             problemData.shuffle();
 
+            // record the order that the problems will be presented in
+            for(var i = 0; i < problemData.length; i++) { 
+               orderingOfProblems.push(problemData[i][0]);
+            }
+
             // shuffle the side in which a problem appears on, (left or right);
             // TODO this needs to changed if 3 problems are being presented to the user
             for (var i = 0; i < problemData.length; i++) {
@@ -256,7 +262,7 @@ $(document).ready(function() {
             // find better place to put this
             populateOutcomeValuesInSlider();
             createChoiceButtonText();
-   
+
          }, 
          'json' 
          );
@@ -721,6 +727,7 @@ function sendDataToServer() {
 
    $.post("posting.php", { 
          'id' : createUUID(),
+         'orderingOfProblems': JSON.stringify(orderingOfProblems),
          'allChoices': JSON.stringify(choices), 
          'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),
