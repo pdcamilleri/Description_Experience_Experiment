@@ -57,6 +57,7 @@ var problemData = new Array();
 
 var problemDataFile;
 var orderingOfProblems = [];
+var leftRightPresentation = [];
 
 
 // this will contain the descriptions for each problem, eg "80% chance of 4, else 0"
@@ -262,6 +263,14 @@ $(document).ready(function() {
             // find better place to put this
             populateOutcomeValuesInSlider();
             createChoiceButtonText();
+
+            // get the left/right ordering of problems
+            for (var i = 0; i < problemData.length; i++) { 
+               leftRightPresentation[i] = new Array();
+               for (var j = 0; j < problemData[i][1].length; j++) { 
+                  leftRightPresentation[i].push(problemData[i][1][j][0]);
+               } 
+            }
 
          }, 
          'json' 
@@ -738,6 +747,7 @@ function sendDataToServer() {
    $.post("posting.php", { 
          'id' : createUUID(),
          'orderingOfProblems': JSON.stringify(orderingOfProblems),
+         'leftRightPresentation': JSON.stringify(leftRightPresentation),
          'allChoices': JSON.stringify(choices), 
          'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),

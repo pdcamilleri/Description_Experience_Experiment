@@ -11,7 +11,7 @@ $fp = fopen(DATA_DIR.DIRECTORY_SEPARATOR.$filename, 'a') or die("cant open file"
 // get all of the paramaters that were posted from the DEF.js file.
 $id = $_POST['id'];
 $orderingOfProblems = json_decode($_POST['orderingOfProblems']);
-//$top = str_replace('\"','"',$_POST['theoreticalOutcomesAndProbabilities']);
+$leftRightPresentation = json_decode($_POST['leftRightPresentation']);
 $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
@@ -25,6 +25,7 @@ $choiceParadigmType = str_replace('\"','"',$_POST['choiceParadigmType']);
 $feedbackType = str_replace('\"','"',$_POST['feedbackType']);
 
 
+// the outcomes and probabilities pulled from the data file originally used for this problem
 $top = array();
 
 // just reopen the file and get the outcome + probability information again
@@ -64,7 +65,17 @@ for ($i = 0; $i < count($allChoices); $i++) {
    }
 
    fwrite($fp, ",\n");
+
    
+   for ($j = 0; $j < count($leftRightPresentation[$i]); $j++) {
+      if ($leftRightPresentation[$i][0] == $j) {
+         fwrite($fp, "option " . ($j + 1) . " position,");
+         fwrite($fp, "left\n");
+      } else if ($leftRightPresentation[$i][1] == $j) {
+         fwrite($fp, "option " . ($j + 1) . " position,");
+         fwrite($fp, "right\n");
+      }
+   }
    
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
 
