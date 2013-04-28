@@ -354,6 +354,16 @@ function displayButtonValue(button) {
    // and we add 1 to get one of {1, 2, 3}
    choices[problemData[choiceSetCounter][0]].push(problemData[choiceSetCounter][1][parseInt(index)][0] + 1);
    outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
+
+   // check if the participant has made 100 samples. If they have, then force them to make a final choice.
+   if (getTrialNumber() == 100) {
+      // we do this by clicking on the "make final choice" button for them.
+      setTimeout(function() {
+            $("#finalAnswer").click();
+      }, 3000);
+      // we use setTimeout here to wait for the animation (where the outcomes moves from the box to the total) to complete
+   }
+
 }
 
 function setTrialNumber(value) {
