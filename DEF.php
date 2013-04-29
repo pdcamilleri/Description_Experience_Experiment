@@ -125,6 +125,10 @@
           </div> 
          
          
+
+         <div id="overlay" class='overlay' style='display: none;'>
+         </div>
+
          <div id="estimation" class="estimate"> 
 	         <p id="sliderInstructions">
 	            Using your mouse, please adjust the bars below to reflect the probability that you think each of the listed outcomes has of occurring on the very next ticket selected.
@@ -163,7 +167,6 @@
  
 	         <button type='submit' class='myButton' id='sliderFinalAnswer' name="Make final choice" onclick='submitSliderChoice(this)'>Submit estimates</button>
 		      	      
-		      <div id="overlay" class='overlay' style='display: none;'>
 		      </div>
 	      </div>
 	    

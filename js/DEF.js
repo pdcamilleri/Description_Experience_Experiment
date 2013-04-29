@@ -121,7 +121,7 @@ window.onload = function start() {
 	document.getElementById("descriptionInstructions").style.display="none";
 	document.getElementById("feedbackInstructions").style.display="none";
 	document.getElementById("finalChoiceInstructions").style.visibility="hidden";
-	//$(".estimate").hide();
+	$(".estimate").hide();
 	
    // initialise the counters array with 0's depending on how many buttons we are dealing with
    var length = document.getElementsByClassName("myButton").length;
