@@ -740,7 +740,7 @@ function endExperiment() {
 
 function showEndPage() {
    $("#container").hide();
-   $(".container").show()
+   $("farewell").show()
 }
 
 function sendDataToServer() {
