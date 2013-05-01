@@ -651,8 +651,9 @@ function submitSliderChoice(button) {
    // add the array containing the slider choices for this particular problem to 
    // a larger array that stores slider choices for all problems in the experiment
 
-   sliderChoices[problemData[choiceSetCounter][0]] = sliderVals;
-   associatedOutcomes[problemData[choiceSetCounter][0]] = sliderOutcomes;
+   sliderChoices[problemData[choiceSetCounter - 1][0]] = sliderVals;
+   associatedOutcomes[problemData[choiceSetCounter - 1][0]] = sliderOutcomes;
+   // we are using choiceSetCounter - 1 here as choiceSetCounter is prematurely incremented. need to offset this
    //sliderChoices.push(sliderVals);
 
    // reset the sliders
