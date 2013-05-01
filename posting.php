@@ -54,12 +54,14 @@ fwrite($fp, "feedback type,$feedbackType,\n");
 
 fwrite($fp, "\n");
 for ($i = 0; $i < count($allChoices); $i++) {
+   $orderOfThisChoiceSet;
    fwrite($fp, "choice set " . ($i + 1)); // $i + 1 so that the choice sets go from 1..5, and not from 0..4
    fwrite($fp, ",\n");
    fwrite($fp, "choice order,");
    for ($j = 0; $j < count($orderingOfProblems); $j++) {
       if ($orderingOfProblems[$j] == $i) {
          fwrite($fp, $j + 1);
+         $orderOfThisChoiceSet = $j;
          break;
       }
    }
@@ -68,12 +70,12 @@ for ($i = 0; $i < count($allChoices); $i++) {
 
    
    for ($j = 0; $j < count($leftRightPresentation[$i]); $j++) {
-      if ($leftRightPresentation[$i][0] == $j) {
-         fwrite($fp, "option " . ($j + 1) . " position,");
-         fwrite($fp, "left\n");
-      } else if ($leftRightPresentation[$i][1] == $j) {
+      if ($leftRightPresentation[$orderOfThisChoiceSet][0] == $j) {
          fwrite($fp, "option " . ($j + 1) . " position,");
          fwrite($fp, "right\n");
+      } else if ($leftRightPresentation[$orderOfThisChoiceSet][1] == $j) {
+         fwrite($fp, "option " . ($j + 1) . " position,");
+         fwrite($fp, "left\n");
       }
    }
    

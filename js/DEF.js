@@ -246,13 +246,22 @@ $(document).ready(function() {
                orderingOfProblems.push(problemData[i][0]);
             }
 
+
             // shuffle the side in which a problem appears on, (left or right);
             // TODO this needs to changed if 3 problems are being presented to the user
             for (var i = 0; i < problemData.length; i++) {
                if (Math.random() < 0.5) {
+                  // swap the arrays
                   var tempArray = problemData[i][1][0];
                   problemData[i][1][0] = problemData[i][1][1];
                   problemData[i][1][1] = tempArray;
+
+                  // also record that we did this swap
+                  // note that right and left are in a different order than they are in the line below
+                  leftRightPresentation[i] = new Array(0, 1); // 0 == left, 1 == right
+
+               } else {
+                  leftRightPresentation[i] = new Array(1, 0);
                }
                   // TODO
                   // uncomment the line below, and comment the lines above when there are 3 problems per choice set
@@ -264,14 +273,7 @@ $(document).ready(function() {
             populateOutcomeValuesInSlider();
             createChoiceButtonText();
 
-            // get the left/right ordering of problems
-            for (var i = 0; i < problemData.length; i++) { 
-               leftRightPresentation[i] = new Array();
-               for (var j = 0; j < problemData[i][1].length; j++) { 
-                  leftRightPresentation[i].push(problemData[i][1][j][0]);
-               } 
-            }
-
+            
          }, 
          'json' 
          );
@@ -642,7 +644,7 @@ function submitSliderChoice(button) {
       // if the value of this slider is "-", then it means we should ignore it because it doesnt contain a useful value
       if ($(this).parent().children("span").html() != "-") {
          // add all of their slider choice values to an array
-         sliderOutcomes[parseInt($(this).parent().parent().parent().attr("index"))].push(parseInt($(this).parent().children("span").html()));
+         sliderOutcomes[parseInt($(this).parent().parent().parent().attr("index"))].push(parseFloat($(this).parent().children("span").html()));
          sliderVals[parseInt($(this).parent().parent().parent().attr("index"))].push($(this).slider("option", "value"));
          //parseInt($(this).parent().parent().parent().attr("index")); // this is the index, either 0, 1, 2, like left, middle, right
       }
@@ -740,7 +742,7 @@ function endExperiment() {
 
 function showEndPage() {
    $("#container").hide();
-   $("farewell").show()
+   $("#farewell").show()
 }
 
 function sendDataToServer() {
