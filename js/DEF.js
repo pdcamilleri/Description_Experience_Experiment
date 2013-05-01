@@ -735,7 +735,6 @@ function recordData() {
 }
 
 function endExperiment() {
-   alert("The end");
    sendDataToServer();
    showEndPage();
 }
