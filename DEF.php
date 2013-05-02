@@ -173,7 +173,7 @@
 	    
 		  <div id="farewell" class="container" style="display: none;" > 
 		      <p class="emphasize">The End</p>
-		      <p>This is the end of the game! Thank you for your participation. To complete the HIT, please copy and paste the code below into the mTurk HIT page.</p>
+		      <p id="farewellText">This is the end of the game! Thank you for your participation. To complete the HIT, please copy and paste the code below into the mTurk HIT page.</p>
 		      <p id="uniqueCode">Gs98n5F</p>
 		  </div>
       </div>

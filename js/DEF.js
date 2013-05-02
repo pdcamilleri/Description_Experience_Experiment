@@ -17,6 +17,10 @@ var FeedbackTypeEnum = {
      COMPLETE : {value: 2, name: "complete", code: "c"}
 };
 
+
+var uuid = createUUID();
+var lastSeenOutcome;
+
 // these variables will hold the value of each condition that is being used in the current experiment
 //var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
 var probabilityEstimateType = (function() {
@@ -298,6 +302,8 @@ function displayButtonValue(button) {
          // display the random element, but hide it first (we will display it later based on the FeedbackType
          $("#buttonScore_" + index).hide()
                                    .html(randomElement);
+
+         lastSeenOutcome = randomElement;
 
    });
 
@@ -742,6 +748,14 @@ function endExperiment() {
 }
 
 function showEndPage() {
+   $("#farewellText").html(
+         "Thank you for playing the game. The number written on the ticket that you selected was "
+         + lastSeenOutcome
+         + ". This means that you will be given a bonus payment of $" 
+         + (lastSeenOutcome / 100).toFixed(2) 
+         + ". To complete the HIT please copy the following code back into the AMT website:"
+   );
+   $("#uniqueCode").html(uuid + "_" + ((lastSeenOutcome / 100).toFixed(2)) * 100);
    $("#container").hide();
    $("#farewell").show()
 }
@@ -749,7 +763,7 @@ function showEndPage() {
 function sendDataToServer() {
 
    $.post("posting.php", { 
-         'id' : createUUID(),
+         'id' : uuid, 
          'orderingOfProblems': JSON.stringify(orderingOfProblems),
          'leftRightPresentation': JSON.stringify(leftRightPresentation),
          'allChoices': JSON.stringify(choices), 
