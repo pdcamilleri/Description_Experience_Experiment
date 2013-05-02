@@ -80,7 +80,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
    }
    
-   for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
+   for ($j = 0; $j < count($leftRightPresentation); $j++) {
 
       $sortedProbabilities = array();
 
