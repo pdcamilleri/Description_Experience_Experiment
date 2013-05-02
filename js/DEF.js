@@ -317,7 +317,7 @@ function displayButtonValue(button) {
       // reset everything ready for the next problem
       makingFinalChoice = false;
 
-      recordFinalChoice(leftRightPresentation[choiceSetCounter][parseInt(button.getAttribute("index"))], parseInt($this.html()));
+      recordFinalChoice(button.getAttribute("index"), parseInt($this.html()));
 
       // get rid of the overlay, revert the instruction text back to black
       $("#overlay").hide();
