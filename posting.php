@@ -82,12 +82,22 @@ for ($i = 0; $i < count($allChoices); $i++) {
    
    for ($j = 0; $j < count($allSliderChoices[$i]); $j++) {
 
+      $sortedProbabilities = array();
+
       fwrite($fp, "option " . ($j + 1) . " outcomes,");
       for ($k = 0; $k < count($top[$i][$j]); $k = $k + 2) {
          fwrite($fp, $top[$i][$j][$k]);
          fwrite($fp, ",");
       }
       fwrite($fp, "\n");
+
+      for ($k = 0; $k < count($top[$i][$j]); $k = $k + 2) {
+         for ($l = 0; $l < count($associatedOutcomes[$i][$j]); $l++) {
+            if ($top[$i][$j][$k] ==  $associatedOutcomes[$i][$j][$l]) {
+               array_push($sortedProbabilities, $allSliderChoices[$i][$j][$l]);
+            }
+         }
+      }
     
       fwrite($fp, "option " . ($j + 1) . " probabilities,");
       for ($k = 1; $k < count($top[$i][$j]); $k = $k + 2) {
@@ -96,17 +106,28 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       fwrite($fp, "\n");
 
+      fwrite($fp, "option " . ($j + 1) . " slider estimates,"); 
 
-      fwrite($fp, "option " . ($j + 1) . " slider choices,"); 
+
+      for ($k = 0; $k < count($sortedProbabilities); $k++) {
+         fwrite($fp, $sortedProbabilities[$k]);
+         fwrite($fp, ",");
+      }
+
+      /*
       for ($k = 0; $k < count($allSliderChoices[$i][$j]); $k++) {
          fwrite($fp, $allSliderChoices[$i][$j][$k]);
          fwrite($fp, ",");
       }
+      */
+
       // this while loop adds the extra -'s for sliders that are not used
       while ($k++ < 5) {
          fwrite($fp, "-,");
       }
       fwrite($fp, "\n");
+
+      /*
       fwrite($fp, "option " . ($j + 1) . " slider outcomes,"); 
       for ($k = 0; $k < count($associatedOutcomes[$i][$j]); $k++) {
          fwrite($fp, $associatedOutcomes[$i][$j][$k]);
@@ -116,8 +137,8 @@ for ($i = 0; $i < count($allChoices); $i++) {
       while ($k++ < 5) {
          fwrite($fp, "-,");
       }
+      */
 
-      fwrite($fp, "\n");
    }
    
    fwrite($fp, "choices,");
@@ -140,7 +161,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       fwrite($fp, ",");
    }
-   fwrite($fp, "\nfinal choice, " . $finalChoices[$orderOfThisChoiceSet]);
+   fwrite($fp, "\nfinal choice, " . ($finalChoices[$orderOfThisChoiceSet] + 1));
 
    fwrite($fp, "\n\n");
 
