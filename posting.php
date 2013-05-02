@@ -161,7 +161,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       fwrite($fp, ",");
    }
-   fwrite($fp, "\nfinal choice, " . ($finalChoices[$orderOfThisChoiceSet] + 1));
+   fwrite($fp, "\nfinal choice, " . ($finalChoices[$orderOfThisChoiceSet]));
 
    fwrite($fp, "\n\n");
 
