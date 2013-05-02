@@ -16,6 +16,7 @@ $allChoices = json_decode($_POST['allChoices']);
 $allOutcomes = json_decode($_POST['allOutcomes']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
 $associatedOutcomes = json_decode($_POST['associatedOutcomes']);
+$finalChoices = json_decode($_POST['finalChoices']);
 
 $demographics = str_replace('\"','"',$_POST['demographics']);
 
@@ -139,6 +140,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       fwrite($fp, ",");
    }
+   fwrite($fp, "\nfinal choice, " . $finalChoices[$orderOfThisChoiceSet]);
 
    fwrite($fp, "\n\n");
 

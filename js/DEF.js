@@ -317,7 +317,7 @@ function displayButtonValue(button) {
       // reset everything ready for the next problem
       makingFinalChoice = false;
 
-      recordFinalChoice(button.name, parseInt($this.html()));
+      recordFinalChoice(leftRightPresentation[choiceSetCounter][parseInt(button.getAttribute("index"))], parseInt($this.html()));
 
       // get rid of the overlay, revert the instruction text back to black
       $("#overlay").hide();
@@ -770,6 +770,7 @@ function sendDataToServer() {
          'allOutcomes': JSON.stringify(outcomes),
          'allSliderChoices': JSON.stringify(sliderChoices),
          'associatedOutcomes': JSON.stringify(associatedOutcomes),
+         'finalChoices':JSON.stringify(finalChoices),
          'problemDataFile': JSON.stringify(problemDataFile),
          'demographics': unescape(demographics),
          'probabilityEstimateType': JSON.stringify(probabilityEstimateType.name),
