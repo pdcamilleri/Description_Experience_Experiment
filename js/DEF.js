@@ -658,6 +658,18 @@ function submitSliderChoice(button) {
       }
    });
 
+   // if this the left-right ordering was reveresed at the start, then we want to swap the slider information
+   // so that the correct slider information is in the correct place in the output file
+   //if (leftRightPresentation[problemData[choiceSetCounter - 1][0]][0] == 0) {
+   if (leftRightPresentation[choiceSetCounter - 1][0] == 0) {
+      var temp = sliderOutcomes[0];
+      sliderOutcomes[0] = sliderOutcomes[1];
+      sliderOutcomes[1] = temp;
+      temp = sliderVals[0];
+      sliderVals[0] = sliderVals[1];
+      sliderVals[1] = temp;
+   }
+
    // add the array containing the slider choices for this particular problem to 
    // a larger array that stores slider choices for all problems in the experiment
 
