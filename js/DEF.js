@@ -393,10 +393,12 @@ function moveOutcomeToTotalScore(value, $outcome) {
    // animate the outcome moving to the total score
    startX = $outcome.position().left;
    startY = $outcome.position().top;
-   $outcome.animate({'left': centerX - startX, 'top': centerY - startY}, PER_MOVE_TIMEOUT_LENGTH * 1000);
+   //$outcome.animate({'left': centerX - startX, 'top': centerY - startY}, PER_MOVE_TIMEOUT_LENGTH * 1000);
 
    // PER + POST since animate() is non blocking
-   setTimeout(postAnimateCleanup, (PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH) * 1000, value, $outcome);
+   setTimeout(postAnimateCleanup, 1500, value, $outcome);
+   // the following line has a longer timeout to allow for the animation to complete
+   //setTimeout(postAnimateCleanup, (PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH) * 1000, value, $outcome);
 
 }
 
