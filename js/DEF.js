@@ -33,12 +33,11 @@ var probabilityEstimateType = (function() {
 var choiceParadigmType = ChoiceParadigmEnum.SAMPLING;
 var feedbackType = FeedbackTypeEnum.PARTIAL;
 
-//var TIMEOUT_LENGTH = 2; // in seconds
-// Timeout lengths in seconds
+//var TIMEOUT_LENGTH = 2;
 // how long the outcome remains in its original position before the animation 
 var PRE_MOVE_TIMEOUT_LENGTH = 1;
 // during, how long the animation takes
-var PER_MOVE_TIMEOUT_LENGTH = 1;
+var PER_MOVE_TIMEOUT_LENGTH = 0;
 // after, how long to leave the outcome next to the animation
 var POST_MOVE_TIMEOUT_LENGTH = 1;
 
@@ -402,7 +401,7 @@ function moveOutcomeToTotalScore(value, $outcome) {
    //$outcome.animate({'left': centerX - startX, 'top': centerY - startY}, PER_MOVE_TIMEOUT_LENGTH * 1000);
 
    // PER + POST since animate() is non blocking
-   setTimeout(postAnimateCleanup, 1500, value, $outcome);
+   setTimeout(postAnimateCleanup, PER_MOVE_TIMEOUT_LENGTH * 1000, value, $outcome);
    // the following line has a longer timeout to allow for the animation to complete
    //setTimeout(postAnimateCleanup, (PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH) * 1000, value, $outcome);
 
