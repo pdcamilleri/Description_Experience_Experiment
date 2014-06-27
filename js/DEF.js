@@ -31,7 +31,7 @@ var probabilityEstimateType = (function() {
       }
 })();
 var choiceParadigmType = ChoiceParadigmEnum.SAMPLING;
-var feedbackType = FeedbackTypeEnum.PARTIAL;
+var feedbackType = FeedbackTypeEnum.COMPLETE;
 
 //var TIMEOUT_LENGTH = 2;
 // how long the outcome remains in its original position before the animation 
@@ -339,7 +339,8 @@ function displayButtonValue(button) {
       $this.show();
    } else if (feedbackType == FeedbackTypeEnum.COMPLETE) {
       // show all scores
-      $(".score").show()
+      $(".score").show();
+      // TODO make this bold to show the score that was selected
    }
 
    disableChoiceButtonsSilently();
