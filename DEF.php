@@ -77,7 +77,7 @@
 	            The number written on the ticket that you select will add to your game points score. 
 	         </p>
 	         <p class="expInfo" id="problemNumber"> Problem: <span class="number"> 1 </span></p>
-	         <p class="expInfo"   id="trialNumber"> Trial:   <span class="number"> 0 </span></p>
+	         <p class="expInfo"   id="trialNumber"> Trial:   <span class="number"> 1 </span></p>
 	      </div>
             
             

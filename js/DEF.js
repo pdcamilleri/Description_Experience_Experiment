@@ -360,10 +360,11 @@ function displayButtonValue(button) {
       counters[index] = 0;
    }
 
+   //if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
    if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
       // TODO
       // move to next problem
-      alert("you have sampled 5 times, moving on to the next phase now");
+      //alert("you have sampled 5 times, moving on to the next phase now");
       disableChoiceButtons();
       moveToNextPhase();
    }
@@ -377,7 +378,7 @@ function displayButtonValue(button) {
    outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
 
    // check if the participant has made 100 samples. If they have, then force them to make a final choice.
-   if (getTrialNumber() == getNumberOfWantedTrials() - 1) { // -1 since trialNumber starts from 0
+   if (getTrialNumber() >= getNumberOfWantedTrials()) {
       // we do this by clicking on the "make final choice" button for them.
       setTimeout(function() {
             $("#finalAnswer").click();
@@ -479,7 +480,7 @@ function getTrialNumber() {
 // returns the number of trials that the experimenter wants the participant to make before entering the "choosing" stage
 function getNumberOfWantedTrials() {
   if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
-    return 3; // get the number from the csv file
+    return problemData[choiceSetCounter][2];
   } else {
     return 100; // default number of trials before participant is forced into the choosing phase
     // TODO make this a constant?

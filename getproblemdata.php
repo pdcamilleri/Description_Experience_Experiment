@@ -60,21 +60,31 @@ if (($file = fopen($choiceSetFile, "r")) !== FALSE) {
       array_shift($data);
       $smallArray = array();
 
+     // next element is the numberOfTrials for this particular problem, lets shift that too.
+     $numberOfTrials = intval(array_shift($data));
+
       // so now the array contains only numbers, just what we want.
+      // TODO i believe the above line is a lie, should remove the next 11 members, referred to as OTHER_CRAP to make the following slices easier
       // so lets adds this to the end of our big array using push
       for ($i = 0; $i < NUM_OPTIONS; $i++) {
-         //array_push($bigArray, array_chunk($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i) NUM_OUTCOMES_PER_ALTERNATIVE);
+       //array_push($bigArray, array_chunk($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i) NUM_OUTCOMES_PER_ALTERNATIVE);
 
-         // here we send across the problem data as a big array. the first value of the array is the description, eg 80% chance of 4, else 0
-         $thing = array_merge(
-               array_slice($data, (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, 1), 
-               array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE)
+       // here we send across the problem data as a big array. 
+       // the first value is the number of trials
+       // the second value of the array is the description, eg 80% chance of 4, else 0
+       // the last are all the outcomes
+       $description = array_slice($data, (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, 1);
+       $outcomes = array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE);
+       $thing = array_merge(
+            $description,
+            $outcomes
          );
          // the $i is used to randomised/unrandomise the side that the button is on when presented to the participant
          array_push($smallArray, array($i, $thing));
          //array_push($smallArray, array_slice($data, OTHER_CRAP + (OTHER_CRAP + NUM_OUTCOMES_PER_ALTERNATIVE) * $i, NUM_OUTCOMES_PER_ALTERNATIVE));
       }
-      array_push($bigArray, array($lineNumber, $smallArray));
+      // insert the numberOfTrials at the end of each problem array
+      array_push($bigArray, array($lineNumber, $smallArray, $numberOfTrials));
       //array_push($bigArray, $smallArray);
       $lineNumber++;
    }
