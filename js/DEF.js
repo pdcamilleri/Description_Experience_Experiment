@@ -25,7 +25,7 @@ var lastSeenOutcome;
 //var probabilityEstimateType = ProbabilityEstimateTypeEnum.NONE;
 var probabilityEstimateType = (function() {
       if (Math.random() < 0.5) { 
-         return ProbabilityEstimateTypeEnum.FINAL;
+         return ProbabilityEstimateTypeEnum.ALL; // FINAL
       } else { 
          return ProbabilityEstimateTypeEnum.ALL;
       }
@@ -149,6 +149,10 @@ window.onload = function start() {
       $("#currentScore").hide();
    } else if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK) {
       $("#finalAnswer").hide()
+   }
+
+   if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
+      $("#finalAnswer").hide();
    }
 
 };
@@ -373,7 +377,7 @@ function displayButtonValue(button) {
    outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
 
    // check if the participant has made 100 samples. If they have, then force them to make a final choice.
-   if (getTrialNumber() == 100) {
+   if (getTrialNumber() == getNumberOfWantedTrials() - 1) { // -1 since trialNumber starts from 0
       // we do this by clicking on the "make final choice" button for them.
       setTimeout(function() {
             $("#finalAnswer").click();
@@ -470,6 +474,16 @@ function setTrialNumber(value) {
 
 function getTrialNumber() {
    return parseInt($("#trialNumber > .number").html());
+}
+
+// returns the number of trials that the experimenter wants the participant to make before entering the "choosing" stage
+function getNumberOfWantedTrials() {
+  if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
+    return 3; // get the number from the csv file
+  } else {
+    return 100; // default number of trials before participant is forced into the choosing phase
+    // TODO make this a constant?
+  }
 }
 
 function recordFinalChoice(choice, value) {
