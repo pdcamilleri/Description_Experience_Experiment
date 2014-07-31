@@ -34,6 +34,9 @@ $minFileNumber = 1;
 $maxFileNumber = 200;
 $chosenFile = rand($minFileNumber, $maxFileNumber);
 
+$chosenFile = 1;
+$chosenFolder = "k2";
+
 // put it all together to pick a single file
 $choiceSetFile = "choiceSets/${chosenFolder}/${chosenFolder}-${chosenFile}.csv";
 
