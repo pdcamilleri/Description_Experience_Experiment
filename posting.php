@@ -37,7 +37,7 @@ if (($file = fopen(substr($problemDataFile, 1, -1), "r")) !== FALSE) {
       array_shift($data);
       $smallOutcomesArray = array();
       for ($z = 0; $z < 3; $z++) { // 3 == NUM_OPTIONS, see getproblemdata.php
-         array_push($smallOutcomesArray, array_slice($data, 1 + (11 + 100) * $z, 10));
+         array_push($smallOutcomesArray, array_slice($data, 2 + (11 + 100) * $z, 10)); // processing the csv file. 2 is for the first 2 columns, including the numberOfSamples
       }
       array_push($top, $smallOutcomesArray);
    }
