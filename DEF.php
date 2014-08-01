@@ -33,7 +33,7 @@
 	            The Ticket Game
 	         </p>
 	         <p id="overallInstructions">
-	            Welcome to the “ticket game”. 
+	            Welcome to the "ticket game". 
 	            The ticket game comprises of many different rounds. 
 	            In each round you will be shown a number of different boxes. 
 	            Each box contains a huge number of different tickets. 

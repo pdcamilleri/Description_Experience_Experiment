@@ -289,6 +289,8 @@ $(document).ready(function() {
 
 // displays the next outcome, called when a button is pressed
 function displayButtonValue(button) {
+
+   disableChoiceButtonsSilently();
  
    // display an outcome value for each button
    $(".choiceButton").each(function() {
@@ -382,7 +384,7 @@ function displayButtonValue(button) {
       // we do this by clicking on the "make final choice" button for them.
       setTimeout(function() {
             $("#finalAnswer").click();
-      }, 3000);
+      }, 1500);
       // we use setTimeout here to wait for the animation (where the outcomes moves from the box to the total) to complete
    }
 
@@ -416,7 +418,9 @@ function moveOutcomeToTotalScore(value, $outcome) {
 function postAnimateCleanup(value, $outcome) {
 
    // enable buttons
-   enableChoiceButtons();
+   if (getTrialNumber() < getNumberOfWantedTrials()) {
+     enableChoiceButtons();
+   }
    enableMakeFinalChoice();
 
    // update the score
@@ -433,7 +437,9 @@ function postAnimateCleanup(value, $outcome) {
 
 }
 
+// called when the users click on the "make final choice" button. Sometimes this is hidden and is clicked for the user using JS
 function makeFinalChoice(button) {
+   disableChoiceButtonsSilently(); // pretty sure this is redundant...
 
    // first we enable the overlay to darken the page
    $("#overlay").fadeIn(FINAL_CHOICE_FADE_IN_LENGTH * 1000);
@@ -442,8 +448,6 @@ function makeFinalChoice(button) {
    //$("#finalChoiceInstructions").css("color", "white");
 	document.getElementById("finalChoiceInstructions").style.visibility="visible";
    $("#finalChoiceInstructions").animate({"color": "white"}, FINAL_CHOICE_FADE_IN_LENGTH * 1000);
-
-   disableChoiceButtonsSilently();
 
    setTimeout(enableChoiceButtons, (PRE_MOVE_TIMEOUT_LENGTH + PER_MOVE_TIMEOUT_LENGTH + POST_MOVE_TIMEOUT_LENGTH * 2) * 1000);
 
@@ -645,8 +649,8 @@ function disableChoiceButtons() {
 }
 
 function disableChoiceButtonsSilently() {
-   $(".choiceButton").attr('disabled','disabled');
-                     //.css('color', 'red');
+   $(".choiceButton").attr('disabled','disabled')
+                     .css('color', 'red');
 }
 
 // saves the current value of all the sliders in the main slider array
