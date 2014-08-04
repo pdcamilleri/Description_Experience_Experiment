@@ -363,13 +363,13 @@ function displayButtonValue(button) {
    }
 
    //if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
-   if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
+   //if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK && getTrialNumber() == 4) {
       // TODO
       // move to next problem
       //alert("you have sampled 5 times, moving on to the next phase now");
-      disableChoiceButtons();
-      moveToNextPhase();
-   }
+      //disableChoiceButtons();
+      //moveToNextPhase();
+   //}
 
    setTrialNumber(getTrialNumber() + 1);
 
@@ -380,7 +380,7 @@ function displayButtonValue(button) {
    outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
 
    // check if the participant has made 100 samples. If they have, then force them to make a final choice.
-   if (getTrialNumber() >= getNumberOfWantedTrials()) {
+   if (getTrialNumber() > getNumberOfWantedTrials()) {
       // we do this by clicking on the "make final choice" button for them.
       setTimeout(function() {
             $("#finalAnswer").click();
@@ -418,7 +418,7 @@ function moveOutcomeToTotalScore(value, $outcome) {
 function postAnimateCleanup(value, $outcome) {
 
    // enable buttons
-   if (getTrialNumber() < getNumberOfWantedTrials()) {
+   if (getTrialNumber() <= getNumberOfWantedTrials()) {
      enableChoiceButtons();
    }
    enableMakeFinalChoice();
