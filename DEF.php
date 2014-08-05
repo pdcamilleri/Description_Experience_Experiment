@@ -134,7 +134,7 @@
          <div id="estimation" class="estimate"> 
 	         <p id="sliderInstructions">
 	            Using your mouse, please adjust the bars below to reflect the probability that you think each of the listed outcomes has of occurring on the very next ticket selected.
-	            When you are satisfied with your estimated distribution, the please click on the “Submit estimates” button. 
+	            When you are satisfied with your estimated distribution, the please click on the "Submit estimates" button. 
 	            Note that the bars associated with each ticket must total 100% for each box before you can submit your estimates. 
 	         </p>
 
