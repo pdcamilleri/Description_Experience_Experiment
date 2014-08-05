@@ -83,7 +83,14 @@ var choices = new Array(
       new Array()
 );
 // will contain the outcome from that particular button
-var outcomes = new Array( 
+var outcomes1 = new Array( 
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array(),
+      new Array()
+);
+var outcomes2 = new Array( 
       new Array(),
       new Array(),
       new Array(),
@@ -110,7 +117,8 @@ var associatedOutcomes = new Array(
 // TODO 1-1 relatonship between the above two, can put into 2d array
 
 // bigger array to hold all choices and outcomes, which will be sent to the server at the end of the experiment
-var allOutcomes = new Array();
+var allOutcomes1 = new Array();
+var allOutcomes2 = new Array();
 var allChoices = new Array();
 
 // used when animating the outcomes
@@ -771,7 +779,8 @@ function unique(arr) {
 
 function recordData() {
    allChoices.push(choices);
-   allOutcomes.push(outcomes);
+   allOutcomes1.push(outcomes1);
+   allOutcomes2.push(outcomes2);
 }
 
 function endExperiment() {
@@ -799,7 +808,8 @@ function sendDataToServer() {
          'orderingOfProblems': JSON.stringify(orderingOfProblems),
          'leftRightPresentation': JSON.stringify(leftRightPresentation),
          'allChoices': JSON.stringify(choices), 
-         'allOutcomes': JSON.stringify(outcomes),
+         'allOutcomes1': JSON.stringify(outcomes1),
+         'allOutcomes2': JSON.stringify(outcomes2),
          'allSliderChoices': JSON.stringify(sliderChoices),
          'associatedOutcomes': JSON.stringify(associatedOutcomes),
          'finalChoices':JSON.stringify(finalChoices),

@@ -13,7 +13,8 @@ $id = $_POST['id'];
 $orderingOfProblems = json_decode($_POST['orderingOfProblems']);
 $leftRightPresentation = json_decode($_POST['leftRightPresentation']);
 $allChoices = json_decode($_POST['allChoices']);
-$allOutcomes = json_decode($_POST['allOutcomes']);
+$allOutcomes1 = json_decode($_POST['allOutcomes1']);
+$allOutcomes2 = json_decode($_POST['allOutcomes2']);
 $allSliderChoices = json_decode($_POST['allSliderChoices']);
 $associatedOutcomes = json_decode($_POST['associatedOutcomes']);
 $finalChoices = json_decode($_POST['finalChoices']);
@@ -68,9 +69,8 @@ for ($i = 0; $i < count($allChoices); $i++) {
    }
 
    fwrite($fp, ",\n");
-
-   
-   for ($j = 0; $j < count($leftRightPresentation[$i]); $j++) {
+ 
+/*   for ($j = 0; $j < count($leftRightPresentation[$i]); $j++) {
       if ($leftRightPresentation[$orderOfThisChoiceSet][0] == $j) {
          fwrite($fp, "option " . ($j + 1) . " position,");
          fwrite($fp, "right\n");
@@ -79,10 +79,20 @@ for ($i = 0; $i < count($allChoices); $i++) {
          fwrite($fp, "left\n");
       }
    }
+   */
+
    
    for ($j = 0; $j < count($leftRightPresentation[$i]); $j++) {
 
       $sortedProbabilities = array();
+
+      if ($leftRightPresentation[$orderOfThisChoiceSet][0] == $j) {
+         fwrite($fp, "option " . ($j + 1) . " position,");
+         fwrite($fp, "right\n");
+      } else if ($leftRightPresentation[$orderOfThisChoiceSet][1] == $j) {
+         fwrite($fp, "option " . ($j + 1) . " position,");
+         fwrite($fp, "left\n");
+      }
 
       fwrite($fp, "option " . ($j + 1) . " outcomes,");
       for ($k = 0; $k < count($top[$i][$j]); $k = $k + 2) {
@@ -125,7 +135,6 @@ for ($i = 0; $i < count($allChoices); $i++) {
       while ($k++ < 5) {
          fwrite($fp, "-,");
       }
-      fwrite($fp, "\n");
 
       /*
       fwrite($fp, "option " . ($j + 1) . " slider outcomes,"); 
@@ -139,9 +148,33 @@ for ($i = 0; $i < count($allChoices); $i++) {
       }
       */
 
+
+      if ($j == 0) {
+         fwrite($fp, "\noutcomes1,");
+         for ($k = 0; $k < 100; $k++) {
+            if ($k < count($allOutcomes1[$i])) {
+               fwrite($fp, $allOutcomes1[$i][$k]);
+            } else {
+               fwrite($fp, "-");
+            }
+            fwrite($fp, ",");
+         }
+
+      } else if ($j == 1) {
+
+         fwrite($fp, "\noutcomes2,");
+            for ($k = 0; $k < 100; $k++) {
+               if ($k < count($allOutcomes2[$i])) {
+               fwrite($fp, $allOutcomes2[$i][$k]);
+            } else {
+               fwrite($fp, "-");
+            }
+            fwrite($fp, ",");
+         }
+      }
    }
    
-   fwrite($fp, "choices,");
+   fwrite($fp, "\nchoices,");
    for ($j = 0; $j < 100; $j++) {
       if ($j < count($allChoices[$i])) {
          fwrite($fp, $allChoices[$i][$j]);
@@ -152,16 +185,8 @@ for ($i = 0; $i < count($allChoices); $i++) {
    }
 
 
-   fwrite($fp, "\noutcomes,");
-   for ($j = 0; $j < 100; $j++) {
-      if ($j < count($allOutcomes[$i])) {
-         fwrite($fp, $allOutcomes[$i][$j]);
-      } else {
-         fwrite($fp, "-");
-      }
-      fwrite($fp, ",");
-   }
    fwrite($fp, "\nfinal choice, " . ($finalChoices[$orderOfThisChoiceSet]));
+
 
    fwrite($fp, "\n\n");
 
