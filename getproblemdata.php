@@ -28,7 +28,7 @@ $bigArray = array();
 // 2 being the next
 // 3 being the last with only 20 choice sets per problem
 // all set to be changed by Adrian for better names
-$experimentNumber = 2;
+$experimentNumber = 3;
 
 // create an array with all of the folders we are picking from, so you can easily add more folders in future
 $folders = array("k2", "k3", "k4"); 
@@ -40,7 +40,7 @@ $minFileNumber = 1;
 $maxFileNumber = 200;
 $chosenFile = rand($minFileNumber, $maxFileNumber);
 
-$chosenFolder = "k4"; // direct all participants to k4
+$chosenFolder = "k2"; // direct all participants to k4
 
 // put it all together to pick a single file
 $choiceSetFile = "choiceSets/${experimentNumber}/${chosenFolder}/${chosenFolder}-${chosenFile}.csv";
