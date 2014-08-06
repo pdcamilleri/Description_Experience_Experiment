@@ -30,7 +30,7 @@ var probabilityEstimateType = (function() {
          return ProbabilityEstimateTypeEnum.ALL;
       }
 })();
-var choiceParadigmType = ChoiceParadigmEnum.FEEDBACK;
+var choiceParadigmType = ChoiceParadigmEnum.SAMPLING;
 var feedbackType = FeedbackTypeEnum.COMPLETE;
 
 //var TIMEOUT_LENGTH = 2;
@@ -156,7 +156,6 @@ window.onload = function start() {
    if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
       $("#currentScore").hide();
    } else if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK) {
-      $("#currentScore").hide();
       $("#finalAnswer").hide()
    }
 
@@ -496,7 +495,7 @@ function getTrialNumber() {
 
 // returns the number of trials that the experimenter wants the participant to make before entering the "choosing" stage
 function getNumberOfWantedTrials() {
-  if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK) {
+  if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
     return problemData[choiceSetCounter][2];
   } else {
     return 100; // default number of trials before participant is forced into the choosing phase
@@ -836,7 +835,7 @@ function setFeedback(type) {
 
 function setChoiceParadigm(type) {
    choiceParadigmType = ChoiceParadigmEnum[type];
-   if (choiceParadigmType == ChoiceParadigmEnum.FEEDBACK) {
+   if (choiceParadigmType == ChoiceParadigmEnum.SAMPLING) {
       $("#currentScore").hide();
    } else {
       $("#currentScore").show();
