@@ -24,6 +24,12 @@ $bigArray = array();
 // so really its $bigArray[choice set][alternative][outcome]
 // its complicated, but by storing everything in this way, it will easily work if you add more choice sets, or a 4th alternative, or whatever.
 
+// 1 being the first experiment
+// 2 being the next
+// 3 being the last with only 20 choice sets per problem
+// all set to be changed by Adrian for better names
+$experimentNumber = 2;
+
 // create an array with all of the folders we are picking from, so you can easily add more folders in future
 $folders = array("k2", "k3", "k4"); 
 // choose a random element from the above array
@@ -37,7 +43,7 @@ $chosenFile = rand($minFileNumber, $maxFileNumber);
 $chosenFolder = "k4"; // direct all participants to k4
 
 // put it all together to pick a single file
-$choiceSetFile = "choiceSets/${chosenFolder}/${chosenFolder}-${chosenFile}.csv";
+$choiceSetFile = "choiceSets/${experimentNumber}/${chosenFolder}/${chosenFolder}-${chosenFile}.csv";
 
 $row = 1;
 // open the file "outcomes.csv" for reading (the "r"), we will access the file using the $file variable
