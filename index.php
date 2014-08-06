@@ -28,7 +28,7 @@ $_SESSION['homepage_visit'] = true;
        Please make your decisions as if the points correspond to real money and that each choice is independent from any others.
     </p>
     <p>
-       The task will take approximately 10 minutes to complete. 
+       The task will take approximately 15 minutes to complete. 
        You will also be asked some demographics questions. 
        Please do not write anything down during the task or use a calculator.
        At the end of the task you will receive a code that should be copied back into the Mechanical Turk HIT that will trigger payment. 

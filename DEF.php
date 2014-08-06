@@ -58,7 +58,7 @@
 				The number written on the ticket will be displayed below the box. 
 				The number of tickets that you have looked at will be recorded on the right of the screen. 
 				At some point during your sampling you will automatically move to the choice phase of the game.
-				During the choice phase the screen will darken and you you will be asked to click on the box that you would like to select a ticket from.
+				During the choice phase the screen will darken and you will be asked to click on the box that you would like to select a ticket from.
 				<!--When you are satisfied that you have a good idea of what types of tickets are in each box, then please click on “Select a ticket” button. 
 				Once you have clicked on this button, you will be asked to click on the box that you would like to select a ticket from. -->
 				One ticket will be randomly selected from your chosen box. 
@@ -134,7 +134,7 @@
          <div id="estimation" class="estimate"> 
 	         <p id="sliderInstructions">
 	            Using your mouse, please adjust the bars below to reflect the probability that you think each of the listed outcomes has of occurring on the very next ticket selected.
-	            When you are satisfied with your estimated distribution, the please click on the "Submit estimates" button. 
+	            When you are satisfied with your estimated distribution, please click on the "Submit estimates" button. 
 	            Note that the bars associated with each ticket must total 100% for each box before you can submit your estimates. 
 	         </p>
 
