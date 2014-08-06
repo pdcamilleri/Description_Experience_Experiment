@@ -756,7 +756,8 @@ function populateOutcomeValuesInSlider() {
       $("#sliders_" + i).children().show();
 
       // get the unique elements present in the outcomes array and assign these to the sliders
-      var uniqueArray = unique(problemData[choiceSetCounter][1][i][1]);
+      //var uniqueArray = unique(problemData[choiceSetCounter][1][i][1]);
+      var uniqueArray = unique(problemData[choiceSetCounter][1][i][1].slice(0, 20));
       var outcomeValues = $("#sliders_" + i).find(".outcomeValues"); 
       for (var j = 0; j < uniqueArray.length; j++) {
          outcomeValues[j].innerHTML = uniqueArray[j];
