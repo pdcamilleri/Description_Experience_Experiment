@@ -362,7 +362,7 @@ function displayButtonValue(button) {
    disableMakeFinalChoiceSilent();
 
    // we have disabled the buttons, now cause a timeout
-   setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 2000, $this.html(), $this);
+   setTimeout(moveOutcomeToTotalScore, PRE_MOVE_TIMEOUT_LENGTH * 2500, $this.html(), $this);
 
    // get the index of this button into our various arrays
    var index = button.getAttribute("index");
@@ -393,7 +393,7 @@ function displayButtonValue(button) {
       // we do this by clicking on the "make final choice" button for them.
       setTimeout(function() {
             $("#finalAnswer").click();
-      }, 2000);
+      }, 2500);
       // we use setTimeout here to wait for the animation (where the outcomes moves from the box to the total) to complete
    }
 
