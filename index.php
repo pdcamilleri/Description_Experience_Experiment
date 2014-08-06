@@ -18,7 +18,7 @@ $_SESSION['homepage_visit'] = true;
     <p class="emphasize">Instructions</p>
     <p>
        Welcome to this decision-making game! 
-       In this task you will be presented with 5 different "choice problems". 
+       In this task you will be presented with multiple different "choice problems". 
        Each choice problem will consist of two different options that you must choose between. 
        Each option will pay out a certain number of points. 
        Note that options are probabilistic and will pay out a <i>different</i> number of points on each play.
@@ -30,7 +30,7 @@ $_SESSION['homepage_visit'] = true;
     <p>
        The task will take approximately 10 minutes to complete. 
        You will also be asked some demographics questions. 
-       Please do not write anything down during the task or use a calculator
+       Please do not write anything down during the task or use a calculator.
        At the end of the task you will receive a code that should be copied back into the Mechanical Turk HIT that will trigger payment. 
        If you are happy to proceed and are 18 years or older, then click on the 'Play' button below.
     </p>

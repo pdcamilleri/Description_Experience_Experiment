@@ -7,7 +7,7 @@ define("NUM_OUTCOMES_PER_ALTERNATIVE", 100);
 // number of options/alternatives on each line in the csv file
 define("NUM_OPTIONS", 3);
 
-# the description column + the 10 probability + outcome columns
+// the description column + the 10 probability + outcome columns
 define("OTHER_CRAP", 11);
 
 //header('Content-Type: application/json');
