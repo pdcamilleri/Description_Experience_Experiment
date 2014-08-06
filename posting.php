@@ -150,7 +150,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
 
 
       if ($j == 0) {
-         fwrite($fp, "\noutcomes1,");
+         fwrite($fp, "\noption 1 outcome sequence,");
          for ($k = 0; $k < 100; $k++) {
             if ($k < count($allOutcomes1[$i])) {
                fwrite($fp, $allOutcomes1[$i][$k]);
@@ -162,7 +162,7 @@ for ($i = 0; $i < count($allChoices); $i++) {
 
       } else if ($j == 1) {
 
-         fwrite($fp, "\noutcomes2,");
+         fwrite($fp, "\noption 2 outcome sequence,");
             for ($k = 0; $k < 100; $k++) {
                if ($k < count($allOutcomes2[$i])) {
                fwrite($fp, $allOutcomes2[$i][$k]);
