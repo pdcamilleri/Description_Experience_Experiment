@@ -386,7 +386,11 @@ function displayButtonValue(button) {
    // problemData[choiceSetCounter][1][parseInt(index)][0] is the outcomes, one of {0, 1, 2}, 0 for the first outcome in the csv file,
    // and we add 1 to get one of {1, 2, 3}
    choices[problemData[choiceSetCounter][0]].push(problemData[choiceSetCounter][1][parseInt(index)][0] + 1);
-   outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
+   //outcomes[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_" + index).html()));
+
+   // because we dont want the one they selected anymore, we now want both
+   outcomes1[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_0").html()));
+   outcomes2[problemData[choiceSetCounter][0]].push(parseFloat($("#buttonScore_1").html()));
 
    // check if the participant has made 100 samples. If they have, then force them to make a final choice.
    if (getTrialNumber() > getNumberOfWantedTrials()) {
