@@ -317,7 +317,7 @@ function displayButtonValue(button) {
          $("#buttonScore_" + index).hide()
                                    .html(randomElement);
 
-         lastSeenOutcome = randomElement;
+         //lastSeenOutcome = randomElement;
 
    });
 
@@ -344,6 +344,8 @@ function displayButtonValue(button) {
       // this wasnt a real sample, so exit from the function
       moveToNextPhase();
       return;
+   } else {
+     lastSeenOutcome = $this.html();
    }
 
    // depending on the feedbackType, display the various outcomes to the user
