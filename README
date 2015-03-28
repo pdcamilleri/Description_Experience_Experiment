@@ -1,1 +1,5 @@
-Ac's Experiment
+Psychology experiment to determine the difference in choices that people make when they are given the same information, but it is presented in two different ways, via description or via experience. In this experiment, the participant is given two boxes with tickets containing unknown numbers/points. They must decide on which box they want to take tickets from to gain the most points.
+
+The two ways chosen for this experiment are "description", where the experimental participant is told the exact contents of the box, e.g. "If you take a ticket from Box A, you have a 80% chance of getting 4, 20% chance of 0".
+
+The second method is by "experience" where the user is not told anything, but they are given a button which will tell them the value of a single random ticket from inside of Box B. They can click this button 100 times. After 100 clicks, they will have received the same distribution as Box A, that is they will have received 80 tickets with a 4, and 20 tickets with a 0, but they will have gained this knowledge via experience.
